@@ -1,6 +1,6 @@
 'use client';
 
-import { useEffect, useState } from 'react';
+import { useEffect, useState, Suspense } from 'react';
 import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
@@ -24,7 +24,7 @@ interface SuccessData {
   hintsUsed?: number;
 }
 
-export default function SuccessPage() {
+function SuccessPageContent() {
   const searchParams = useSearchParams();
   const [successData, setSuccessData] = useState<SuccessData | null>(null);
   const [idealSolution, setIdealSolution] = useState<string>('');
@@ -93,171 +93,184 @@ export default function SuccessPage() {
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
         <div className="text-center">
           <h1 className="text-2xl font-bold text-gray-800 mb-4">No Success Data Found</h1>
-                     <Link href="/problems">
-             <Button>Go Back to Problems</Button>
-           </Link>
+          <Link href="/problems">
+            <Button>Go Back to Problems</Button>
+          </Link>
         </div>
       </div>
     );
   }
 
+  const problem = getProblemById(successData.problemId);
+
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+      <div className="max-w-6xl mx-auto">
         {/* Header */}
         <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-                         <CheckCircle className="h-12 w-12 text-accent" />
-             <h1 className="text-4xl font-bold text-foreground">Congratulations!</h1>
-           </div>
-           <p className="text-xl text-muted-foreground">
-                           You&apos;ve successfully solved {successData && getProblemById(successData.problemId)?.name || 'the problem'}!
-           </p>
+          <div className="flex items-center justify-center mb-4">
+            <CheckCircle className="h-12 w-12 text-green-600 mr-3" />
+            <h1 className="text-4xl font-bold text-gray-800">Congratulations!</h1>
+          </div>
+          <p className="text-xl text-gray-600">
+            You&apos;ve successfully solved &quot;{problem?.name || successData.problemId}&quot;
+          </p>
+        </div>
+
+        {/* Performance Stats */}
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          <Card className="bg-white shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center">
+                <Clock className="h-5 w-5 mr-2 text-blue-600" />
+                Time Taken
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-3xl font-bold text-blue-600">
+                {successData.timeTaken || 0}s
+              </p>
+              <p className="text-sm text-gray-500 mt-1">Total time</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center">
+                <Trophy className="h-5 w-5 mr-2 text-yellow-600" />
+                Performance
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-3xl font-bold text-yellow-600">
+                {successData.executionTime}s
+              </p>
+              <p className="text-sm text-gray-500 mt-1">Execution time</p>
+              <p className="text-sm text-gray-500">{successData.memory}KB memory</p>
+            </CardContent>
+          </Card>
+
+          <Card className="bg-white shadow-lg">
+            <CardHeader className="text-center">
+              <CardTitle className="flex items-center justify-center">
+                <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+                Test Cases
+              </CardTitle>
+            </CardHeader>
+            <CardContent className="text-center">
+              <p className="text-3xl font-bold text-green-600">
+                {successData.testCasesPassed}/{successData.totalTestCases}
+              </p>
+              <p className="text-sm text-gray-500 mt-1">All tests passed</p>
+            </CardContent>
+          </Card>
         </div>
 
         {/* Problem Info */}
-        <Card className="mb-6">
-          <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-                           <Trophy className="h-5 w-5 text-accent" />
-             Problem Solved: {successData && getProblemById(successData.problemId)?.name || 'Unknown Problem'}
-            </CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="flex items-center gap-4">
-                             <Badge className={getDifficultyColor(successData && getProblemById(successData.problemId)?.difficulty || 'Easy')}>
-                 {successData && getProblemById(successData.problemId)?.difficulty || 'Easy'}
-               </Badge>
-                             <span className="text-sm text-muted-foreground">Language: {successData.language}</span>
-            </div>
-          </CardContent>
-        </Card>
-
-        {/* Performance Stats */}
-        <div className="grid md:grid-cols-4 gap-6 mb-8">
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                                 <Clock className="h-5 w-5 text-primary" />
-                 <span className="font-semibold">Execution Time</span>
-               </div>
-               <p className="text-2xl font-bold text-primary">{successData.executionTime}s</p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                <span className="font-semibold">Memory Usage</span>
+        {problem && (
+          <Card className="bg-white shadow-lg mb-8">
+            <CardHeader>
+              <CardTitle className="flex items-center gap-3">
+                {problem.name}
+                <Badge className={getDifficultyColor(problem.difficulty)}>
+                  {problem.difficulty}
+                </Badge>
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <p className="text-gray-600 mb-4">{problem.description}</p>
+              <div className="flex flex-wrap gap-2">
+                {problem.tags.map((tag, index) => (
+                  <Badge key={index} variant="outline" className="text-sm">
+                    {tag}
+                  </Badge>
+                ))}
               </div>
-               <p className="text-2xl font-bold text-secondary">{successData.memory}KB</p>
             </CardContent>
           </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                                 <CheckCircle className="h-5 w-5 text-accent" />
-                 <span className="font-semibold">Test Cases</span>
-               </div>
-               <p className="text-2xl font-bold text-accent">
-                 {successData.testCasesPassed}/{successData.totalTestCases}
-               </p>
-            </CardContent>
-          </Card>
-
-          <Card>
-            <CardContent className="pt-6">
-              <div className="flex items-center gap-2 mb-2">
-                                 <Clock className="h-5 w-5 text-primary" />
-                 <span className="font-semibold">Solving Time</span>
-               </div>
-               <p className="text-2xl font-bold text-primary">
-                 {successData.timeTaken ? `${successData.timeTaken}s` : 'N/A'}
-               </p>
-            </CardContent>
-          </Card>
-        </div>
-
-        {/* Additional Stats */}
-        {successData.hintsUsed !== undefined && (
-          <div className="mb-8">
-            <Card>
-              <CardContent className="pt-6">
-                <div className="flex items-center gap-2 mb-2">
-                  <span className="font-semibold">Hints Used</span>
-                </div>
-               <p className="text-2xl font-bold text-secondary">
-                 {successData.hintsUsed}
-               </p>
-               <p className="text-sm text-muted-foreground mt-1">
-                 {successData.hintsUsed === 0 ? 'Great job solving it independently!' : 'Hints can help guide your thinking'}
-               </p>
-              </CardContent>
-            </Card>
-          </div>
         )}
 
-                {/* Ideal Solution */}
-        <Card className="mb-8">
+        {/* Your Solution */}
+        <Card className="bg-white shadow-lg mb-8">
           <CardHeader>
-            <CardTitle className="flex items-center gap-2">
-              <Trophy className="h-5 w-5 text-accent" />
-              Ideal Solution
+            <CardTitle className="flex items-center justify-between">
+              Your Solution
               <Button
-                variant="ghost"
+                variant="outline"
                 size="sm"
-                onClick={() => copyToClipboard(idealSolution)}
-                className="ml-auto"
+                onClick={() => copyToClipboard(successData.code)}
+                className="flex items-center gap-2"
               >
                 <Copy className="h-4 w-4" />
+                Copy
               </Button>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            {idealSolution ? (
-              <div className="prose prose-sm max-w-none">
-                <pre className="whitespace-pre-wrap text-sm bg-muted p-4 rounded-lg overflow-auto">
-                  {idealSolution}
-                </pre>
-              </div>
-            ) : (
-              <div className="flex items-center justify-center h-32">
-                <div className="animate-spin rounded-full h-8 w-8 border-b-2 border-accent"></div>
-                <span className="ml-2 text-muted-foreground">Loading solution...</span>
-              </div>
-            )}
-          </CardContent>
-        </Card>
-
-        {/* Your Solution */}
-        <Card className="mt-8">
-          <CardHeader>
-            <CardTitle>Your Solution</CardTitle>
-          </CardHeader>
-          <CardContent>
-            <div className="bg-gray-900 text-green-400 p-4 rounded-lg font-mono text-sm overflow-auto">
-              <pre>{successData.code}</pre>
+            <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+              <pre className="text-sm">{successData.code}</pre>
             </div>
           </CardContent>
         </Card>
 
-        {/* Action Buttons */}
-        <div className="flex justify-center gap-4 mt-8">
-                     <Link href="/problems">
-             <Button variant="outline" className="flex items-center gap-2">
-               <ArrowLeft className="h-4 w-4" />
-               Try Another Problem
-             </Button>
-           </Link>
-                     <Link href="/dashboard">
-             <Button className="flex items-center gap-2">
-               <Trophy className="h-4 w-4" />
-               Back to Dashboard
-             </Button>
-           </Link>
+        {/* Ideal Solution */}
+        <Card className="bg-white shadow-lg mb-8">
+          <CardHeader>
+            <CardTitle>Ideal Solution</CardTitle>
+          </CardHeader>
+          <CardContent>
+            <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
+              <pre className="text-sm">{idealSolution}</pre>
+            </div>
+          </CardContent>
+        </Card>
+
+        {/* Navigation */}
+        <div className="flex justify-center gap-4">
+          <Link href="/problems">
+            <Button variant="outline" className="flex items-center gap-2">
+              <ArrowLeft className="h-4 w-4" />
+              Back to Problems
+            </Button>
+          </Link>
+          <Link href="/dashboard">
+            <Button className="flex items-center gap-2">
+              <Trophy className="h-4 w-4" />
+              View Dashboard
+            </Button>
+          </Link>
         </div>
       </div>
     </div>
+  );
+}
+
+function SuccessPageSkeleton() {
+  return (
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+      <div className="max-w-6xl mx-auto">
+        <div className="text-center mb-8">
+          <div className="h-12 w-12 bg-muted rounded-full mx-auto mb-4 animate-pulse"></div>
+          <div className="h-8 bg-muted rounded w-64 mx-auto mb-4 animate-pulse"></div>
+          <div className="h-6 bg-muted rounded w-96 mx-auto animate-pulse"></div>
+        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
+          {[1, 2, 3].map((i) => (
+            <div key={i} className="bg-white shadow-lg rounded-lg p-6">
+              <div className="h-6 bg-muted rounded w-24 mx-auto mb-4 animate-pulse"></div>
+              <div className="h-8 bg-muted rounded w-16 mx-auto animate-pulse"></div>
+            </div>
+          ))}
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function SuccessPage() {
+  return (
+    <Suspense fallback={<SuccessPageSkeleton />}>
+      <SuccessPageContent />
+    </Suspense>
   );
 }

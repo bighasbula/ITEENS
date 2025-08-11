@@ -1,6 +1,6 @@
 'use client';
 
-import { useState, useEffect } from 'react';
+import { useState, useEffect, Suspense } from 'react';
 import { Button } from '@/components/ui/button';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
@@ -15,7 +15,7 @@ import { useUser } from '@/lib/hooks/useUser';
 import { useMutation } from 'convex/react';
 import { api } from '@/convex/_generated/api';
 
-export default function ProblemPage() {
+function ProblemPageContent() {
   const router = useRouter();
   const { userId } = useUser();
   const submitSolution = useMutation(api.submissions.submitSolution);
@@ -246,5 +246,44 @@ export default function ProblemPage() {
         </div>
       </div>
     </div>
+  );
+}
+
+function ProblemPageSkeleton() {
+  return (
+    <div className="h-[calc(100vh-3.5rem)] flex flex-col">
+      <div className="border-b border-border bg-secondary/95">
+        <div className="flex h-14 items-center px-4 gap-4">
+          <div className="h-6 bg-muted rounded animate-pulse w-32"></div>
+          <div className="h-6 bg-muted rounded animate-pulse w-16"></div>
+          <div className="ml-auto flex gap-2">
+            <div className="h-9 bg-muted rounded animate-pulse w-16"></div>
+            <div className="h-9 bg-muted rounded animate-pulse w-20"></div>
+          </div>
+        </div>
+      </div>
+      <div className="flex-1 flex">
+        <div className="w-1/2 border-r p-4">
+          <div className="space-y-4">
+            <div className="h-8 bg-muted rounded animate-pulse"></div>
+            <div className="h-4 bg-muted rounded animate-pulse"></div>
+            <div className="h-4 bg-muted rounded animate-pulse w-3/4"></div>
+            <div className="h-4 bg-muted rounded animate-pulse w-1/2"></div>
+          </div>
+        </div>
+        <div className="w-1/2 flex flex-col">
+          <div className="h-10 bg-muted animate-pulse"></div>
+          <div className="flex-1 bg-muted animate-pulse"></div>
+        </div>
+      </div>
+    </div>
+  );
+}
+
+export default function ProblemPage() {
+  return (
+    <Suspense fallback={<ProblemPageSkeleton />}>
+      <ProblemPageContent />
+    </Suspense>
   );
 }
