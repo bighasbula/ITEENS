@@ -1,0 +1,76 @@
+# Cursor Rules for Coding Battles Platform
+
+## 🛠️ Tech Stack
+
+- **Frontend Framework**: [Next.js](https://nextjs.org/)
+- **Component Library**: [shadcn/ui](https://ui.shadcn.dev/)
+- **Code Editor**: [Monaco Editor](https://microsoft.github.io/monaco-editor/)
+- **Authentication**: [Clerk](https://clerk.dev/)
+- **Backend**: [Convex](https://convex.dev/) — for user data, submission storage, and logic
+
+- **Code Execution**: [Judge0](https://judge0.com/) 
+- **Deployment**: [Vercel](https://vercel.com/)
+
+---
+
+## 💡 Core Feature (MVP)
+
+### 1. 🚀 Practice Mode
+- User selects their difficulty level (e.g., Beginner, Intermediate, Advanced)
+- A coding problem is selected from a **predefined set** stored in Convex
+- Each problem has:
+  - A prompt/description
+  - Language restriction (optional)
+  - One or more test inputs + expected outputs
+- User writes code in the **Monaco Editor**
+- Code is sent to the backend and executed using a code runner API (judge0)
+- Results are compared against expected outputs
+- If correct, the user is redirected to a success page showing:
+  - Performance metrics (execution time, memory usage)
+  - Pre-stored ideal solution in the user's language
+  - User's submitted code for comparison
+
+---
+
+## 🔜 Future Feature
+
+### 2. ⚔️ Arena Mode (Coming later)
+- Real-time 1v1 code battle with same problem
+- First correct submission wins
+- Realtime updates and scoreboard
+- Matchmaking by level
+
+---
+
+## 🧩 Implementation Notes
+
+- Problems and test cases are manually curated and stored in Convex
+- Expected outputs are stored as plain text or structured JSON for easy matching
+- Problems are manually curated with pre-stored ideal solutions
+- Clerk handles all authentication and protected routes
+- shadcn/ui for layout, tabs, buttons, modals, etc.
+- Use Convex functions for:
+  - Storing and fetching problems
+  - Logging submissions and results
+
+---
+
+## 🔄 MVP Roadmap
+- [ ] Setup Next.js with shadcn/ui, Clerk, and Convex
+- [ ] Build user onboarding and level selection UI
+- [ ] Create Convex schema for problems and user submissions
+- [ ] Build Practice Mode flow:
+  - Problem display
+  - Monaco code editor
+  - Submit to code execution API
+  - Match output to expected
+  - Redirect to success page with performance metrics
+- [ ] Display ideal solution and user's code
+- [ ] Prepare for future Arena Mode expansion
+
+---
+
+## 💬 Notes
+- Focus is on quality of user experience, not problem generation
+- Arena Mode logic and realtime functionality will be built in a future update, NOT NOW.
+- Keep backend logic clean and isolated per feature for future scalability
