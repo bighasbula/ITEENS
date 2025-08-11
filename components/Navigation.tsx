@@ -9,7 +9,7 @@ export default function Navigation() {
   const pathname = usePathname();
 
   return (
-    <nav className="border-b border-border bg-background shadow-sm">
+    <nav className="border-b border-border bg-background shadow-sm relative z-50">
       <div className="flex h-14 items-center px-4 gap-4">
         <Link href="/" className="font-bold text-3xl text-primary">
           ITEENS
@@ -42,6 +42,15 @@ export default function Navigation() {
               className={pathname === '/dashboard' ? '' : 'text-foreground hover:text-foreground'}
             >
               Dashboard
+            </Button>
+          </Link>
+          <Link href="/about">
+            <Button 
+              variant={pathname === '/about' ? 'default' : 'ghost'}
+              size="sm"
+              className={pathname === '/about' ? '' : 'text-foreground hover:text-foreground'}
+            >
+              About
             </Button>
           </Link>
           {pathname === '/success' && (

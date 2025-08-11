@@ -53,18 +53,18 @@ export default function DashboardPage() {
 
   return (
     <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 py-8">
+      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center gap-2 mb-4">
-            <Trophy className="h-12 w-12 text-accent" />
-            <h1 className="text-4xl font-bold text-foreground">Your Dashboard</h1>
+        <div className="text-center mb-6 sm:mb-8">
+          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
+            <Trophy className="h-8 w-8 sm:h-12 sm:w-12 text-accent" />
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Your Dashboard</h1>
           </div>
-          <p className="text-xl font-bold text-muted-foreground">Track your coding progress and achievements</p>
+          <p className="text-lg sm:text-xl font-bold text-muted-foreground">Track your coding progress and achievements</p>
         </div>
 
         {/* Main Stats Grid */}
-        <div className="grid md:grid-cols-2 lg:grid-cols-4 gap-6 mb-8">
+        <div className="grid grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 mb-2">
@@ -116,7 +116,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Additional Stats */}
-        <div className="grid md:grid-cols-2 gap-6 mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -175,7 +175,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Recent Submissions */}
-        <Card className="mb-8">
+        <Card className="mb-6 sm:mb-8">
           <CardHeader>
             <CardTitle className="flex items-center gap-2">
               <Zap className="h-5 w-5 text-yellow-600" />
@@ -186,15 +186,15 @@ export default function DashboardPage() {
             {recentSubmissions && recentSubmissions.length > 0 ? (
               <div className="space-y-3">
                 {recentSubmissions.slice(0, 5).map((submission) => (
-                  <div key={submission._id} className="flex items-center justify-between p-3 bg-gray-50 rounded-lg">
-                    <div className="flex items-center gap-3">
+                  <div key={submission._id} className="flex flex-col sm:flex-row sm:items-center sm:justify-between p-3 bg-gray-50 rounded-lg gap-2 sm:gap-3">
+                    <div className="flex items-center gap-2 sm:gap-3">
                       <Badge className={submission.isCorrect ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800'}>
                         {submission.isCorrect ? 'PASS' : 'FAIL'}
                       </Badge>
-                      <span className="font-medium">Problem {submission.problemId}</span>
-                      <span className="text-sm text-gray-500">({submission.language})</span>
+                      <span className="font-medium text-sm sm:text-base">Problem {submission.problemId}</span>
+                      <span className="text-xs sm:text-sm text-gray-500">({submission.language})</span>
                     </div>
-                    <div className="flex items-center gap-4 text-sm text-gray-600">
+                    <div className="flex items-center gap-2 sm:gap-4 text-xs sm:text-sm text-gray-600">
                       <span>{submission.timeTaken}s</span>
                       <span>{new Date(submission.submittedAt).toLocaleDateString()}</span>
                     </div>
@@ -202,16 +202,16 @@ export default function DashboardPage() {
                 ))}
               </div>
             ) : (
-              <div className="text-center py-8 text-gray-500">
-                <Brain className="h-12 w-12 mx-auto mb-4 text-gray-300" />
-                <p>No submissions yet. Start solving problems to see your progress!</p>
+              <div className="text-center py-6 sm:py-8 text-gray-500">
+                <Brain className="h-8 w-8 sm:h-12 sm:w-12 mx-auto mb-3 sm:mb-4 text-gray-300" />
+                <p className="text-sm sm:text-base">No submissions yet. Start solving problems to see your progress!</p>
               </div>
             )}
           </CardContent>
         </Card>
 
         {/* Action Buttons */}
-        <div className="flex justify-center gap-4">
+        <div className="flex flex-col sm:flex-row justify-center gap-3 sm:gap-4">
           <Link href="/problem">
             <Button className="flex items-center gap-2">
               <Target className="h-4 w-4" />

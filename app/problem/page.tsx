@@ -180,50 +180,54 @@ function ProblemPageContent() {
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Problem Header */}
       <div className="border-b border-border bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/5">
-        <div className="flex h-14 items-center px-4 gap-4">
-          <div className="flex items-center gap-2">
-            <h1 className="text-lg font-semibold">{problem.name}</h1>
-            <span className="px-2 py-1 text-xs bg-accent text-accent-foreground rounded-full">{problem.difficulty}</span>
+        <div className="flex flex-col sm:flex-row h-auto sm:h-14 items-start sm:items-center px-3 sm:px-4 gap-2 sm:gap-4 py-2 sm:py-0">
+          <div className="flex items-center gap-2 w-full sm:w-auto">
+            <h1 className="text-base sm:text-lg font-semibold truncate">{problem.name}</h1>
+            <span className="px-2 py-1 text-xs bg-accent text-accent-foreground rounded-full flex-shrink-0">{problem.difficulty}</span>
           </div>
-          <Separator orientation="vertical" className="h-6" />
-          <Select value={language} onValueChange={(value) => setLanguage(value as SupportedLanguage)}>
-            <SelectTrigger className="w-32">
-              <SelectValue />
-            </SelectTrigger>
-            <SelectContent>
-              <SelectItem value="python">Python</SelectItem>
-              <SelectItem value="javascript">JavaScript</SelectItem>
-              <SelectItem value="java">Java</SelectItem>
-              <SelectItem value="cpp">C++</SelectItem>
-            </SelectContent>
-          </Select>
-          <div className="ml-auto flex gap-2">
-            <Button 
-              variant="outline" 
-              onClick={handleRunCode}
-              disabled={isRunning}
-            >
-              {isRunning ? 'Running...' : 'Run'}
-            </Button>
-            <Button 
-              onClick={handleSubmitCode}
-              disabled={isRunning}
-            >
-              {isRunning ? 'Submitting...' : 'Submit'}
-            </Button>
+          <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
+            <Separator orientation="vertical" className="h-6 hidden sm:block" />
+            <Select value={language} onValueChange={(value) => setLanguage(value as SupportedLanguage)}>
+              <SelectTrigger className="w-28 sm:w-32">
+                <SelectValue />
+              </SelectTrigger>
+              <SelectContent>
+                <SelectItem value="python">Python</SelectItem>
+                <SelectItem value="javascript">JavaScript</SelectItem>
+                <SelectItem value="java">Java</SelectItem>
+                <SelectItem value="cpp">C++</SelectItem>
+              </SelectContent>
+            </Select>
+            <div className="flex gap-1 sm:gap-2 ml-auto">
+              <Button 
+                variant="outline" 
+                onClick={handleRunCode}
+                disabled={isRunning}
+                size="sm"
+              >
+                {isRunning ? 'Running...' : 'Run'}
+              </Button>
+              <Button 
+                onClick={handleSubmitCode}
+                disabled={isRunning}
+                size="sm"
+              >
+                {isRunning ? 'Submitting...' : 'Submit'}
+              </Button>
+            </div>
           </div>
         </div>
       </div>
 
       {/* Main Content */}
-      <div className="flex-1 flex">
+      <div className="flex-1 flex flex-col lg:flex-row">
         {/* Left Panel - Problem Description */}
-        <div className="w-1/2 border-r overflow-auto">
+        <div className="w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r overflow-auto">
           <ProblemDescription problem={problem} />
         </div>
 
         {/* Right Panel - Code Editor and Terminal */}
-        <div className="w-1/2 flex flex-col">
+        <div className="w-full lg:w-1/2 flex flex-col">
           <Tabs defaultValue="editor" className="flex-1 flex flex-col">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="editor">Code</TabsTrigger>

@@ -4,6 +4,7 @@ import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
 import Navigation from '@/components/Navigation'
+import { Analytics } from "@vercel/analytics/react"
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -16,7 +17,7 @@ const geistMono = Geist_Mono({
 })
 
 export const metadata: Metadata = {
-  title: 'ARENA - Competitive Coding Platform',
+  title: 'ITEENS - Competitive Coding Platform',
   description: 'Practice coding problems and compete with other developers',
 }
 
@@ -34,6 +35,7 @@ export default function RootLayout({
             {children}
           </ConvexClientProvider>
         </ClerkProvider>
+        <Analytics />
       </body>
     </html>
   )
