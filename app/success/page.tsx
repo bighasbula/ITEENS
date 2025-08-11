@@ -5,7 +5,7 @@ import { useSearchParams } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { Badge } from '@/components/ui/badge';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
-import { Separator } from '@/components/ui/separator';
+
 import { CheckCircle, Clock, Trophy, ArrowLeft, Copy } from 'lucide-react';
 import Link from 'next/link';
 import { getProblemById, getIdealSolution } from '@/lib/problems';
@@ -111,7 +111,7 @@ export default function SuccessPage() {
              <h1 className="text-4xl font-bold text-foreground">Congratulations!</h1>
            </div>
            <p className="text-xl text-muted-foreground">
-             You've successfully solved {successData && getProblemById(successData.problemId)?.name || 'the problem'}!
+                           You&apos;ve successfully solved {successData && getProblemById(successData.problemId)?.name || 'the problem'}!
            </p>
         </div>
 

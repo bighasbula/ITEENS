@@ -954,9 +954,7 @@ export function getAllProblems(): Problem[] {
 }
 
 // Helper function to get problems by difficulty
-export function getProblemsByDifficulty(difficulty: 'Easy' | 'Medium' | 'Hard'): Problem[] {
-  return PROBLEMS.filter(problem => problem.difficulty === difficulty);
-}
+
 
 // Helper function to get ideal solution in specific language
 export function getIdealSolution(problem: Problem, language: SupportedLanguage): string {

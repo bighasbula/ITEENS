@@ -71,7 +71,7 @@ export default function ProblemDescription({ problem }: ProblemDescriptionProps)
           <li>• Read the problem description carefully</li>
           <li>• Start with simple examples</li>
           <li>• Test your code with the sample input</li>
-          <li>• Don't worry if it takes time - learning is a process!</li>
+          <li>• Don&apos;t worry if it takes time - learning is a process!</li>
         </ul>
       </div>
     </div>

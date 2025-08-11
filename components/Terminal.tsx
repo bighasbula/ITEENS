@@ -19,8 +19,8 @@ export default function Terminal({ output }: TerminalProps) {
       <div className="whitespace-pre-wrap">
         {output || (
           <span className="text-muted-foreground">
-            Click "Run" to test your code and
-            click "Submit" to submit your code...
+            Click &quot;Run&quot; to test your code and
+            click &quot;Submit&quot; to submit your code...
           </span>
         )}
       </div>

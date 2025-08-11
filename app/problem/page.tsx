@@ -25,12 +25,17 @@ export default function ProblemPage() {
   const [output, setOutput] = useState('');
   const [isRunning, setIsRunning] = useState(false);
   const [startTime, setStartTime] = useState<number | null>(null);
-  const [hintsUsed, setHintsUsed] = useState(0);
+  const [hintsUsed] = useState(0);
 
   // Get problem ID from URL params
   const searchParams = useSearchParams();
   const problemId = searchParams.get('id') || 'sleep-in'; // Default to sleep-in if no ID provided
   const problem = getProblemById(problemId);
+
+  // Start timing when component mounts
+  useEffect(() => {
+    setStartTime(Date.now());
+  }, []);
   
   if (!problem) {
     return (
@@ -42,11 +47,6 @@ export default function ProblemPage() {
       </div>
     );
   }
-
-  // Start timing when component mounts
-  useEffect(() => {
-    setStartTime(Date.now());
-  }, []);
 
   const handleRunCode = async () => {
     if (!code.trim()) {

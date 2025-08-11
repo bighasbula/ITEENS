@@ -12,9 +12,9 @@ interface CodeEditorProps {
 }
 
 export default function CodeEditor({ language, value, onChange, defaultCode }: CodeEditorProps) {
-  const editorRef = useRef<any>(null);
+  const editorRef = useRef<import('monaco-editor').editor.IStandaloneCodeEditor | null>(null);
 
-  const handleEditorDidMount = (editor: any) => {
+  const handleEditorDidMount = (editor: import('monaco-editor').editor.IStandaloneCodeEditor) => {
     editorRef.current = editor;
   };
 
