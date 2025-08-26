@@ -4,11 +4,12 @@ import { useState, useEffect } from 'react'
 import { useRouter } from 'next/navigation'
 import { useMutation, useQuery } from 'convex/react'
 import { api } from '../../convex/_generated/api'
+import { Id } from '../../convex/_generated/dataModel'
 import { useUser } from '@/lib/hooks/useUser'
 import { Button } from '@/components/ui/button'
 import { Card, CardContent, CardDescription, CardHeader, CardTitle } from '@/components/ui/card'
 import { Badge } from '@/components/ui/badge'
-import { Separator } from '@/components/ui/separator'
+
 import { PROBLEMS, TWO_SUM_PROBLEM } from '@/lib/problems'
 import { Loader2, Users, Trophy, Clock, Zap, AlertCircle, Crown } from 'lucide-react'
 import Link from 'next/link'
@@ -22,7 +23,6 @@ export default function ArenaPage() {
   const [error, setError] = useState<string | null>(null)
 
   const createMatch = useMutation(api.matches.createMatch)
-  const joinMatch = useMutation(api.matches.joinMatch)
   const cancelMatch = useMutation(api.matches.cancelMatch)
 
   // Check if user already has an active match
@@ -31,16 +31,12 @@ export default function ArenaPage() {
     userId ? { userId } : "skip"
   )
 
-  // Get current match if we have one
-  const currentMatch = useQuery(
-    api.matches.getMatch,
-    currentMatchId ? { matchId: currentMatchId as any } : "skip"
-  )
+
 
   // Subscribe to match updates
   const matchUpdates = useQuery(
     api.matches.subscribeToMatch,
-    currentMatchId ? { matchId: currentMatchId as any } : "skip"
+    currentMatchId ? { matchId: currentMatchId as Id<"matches"> } : "skip"
   )
 
   // Get user's match history
@@ -85,9 +81,9 @@ export default function ArenaPage() {
       // If we created a match, we're waiting for an opponent
       // If we joined a match, we go directly to the game
       // We'll handle the redirect in the useEffect when matchUpdates changes
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error creating/joining match:', error)
-      setError(error.message || 'Failed to create/join match')
+      setError((error as Error).message || 'Failed to create/join match')
       setIsSearching(false)
       setSelectedProblem(null)
     }
@@ -102,7 +98,7 @@ export default function ArenaPage() {
       setSelectedProblem(null)
       setCurrentMatchId(null)
       setError(null)
-    } catch (error: any) {
+    } catch (error: unknown) {
       console.error('Error canceling match:', error)
       setError('Failed to cancel search')
     }
@@ -172,7 +168,7 @@ export default function ArenaPage() {
                 </div>
                 <CardTitle>Finding Opponent...</CardTitle>
                 <CardDescription>
-                  Looking for someone to challenge on "{PROBLEMS.find(p => p.id === selectedProblem)?.name}"
+                  Looking for someone to challenge on &quot;{PROBLEMS.find(p => p.id === selectedProblem)?.name}&quot;
                 </CardDescription>
               </CardHeader>
               <CardContent className="text-center">

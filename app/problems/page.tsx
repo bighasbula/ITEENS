@@ -1,7 +1,6 @@
 'use client';
 
 import { useUser } from '@/lib/hooks/useUser';
-import { useQuery } from 'convex/react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -16,7 +15,7 @@ export default function ProblemsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
   const [tagFilter, setTagFilter] = useState<string>('all');
-  const { userId, isLoaded } = useUser();
+  const { userId } = useUser();
 
   const allProblems = getAllProblems();
   

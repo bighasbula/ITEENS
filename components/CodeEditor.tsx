@@ -28,10 +28,7 @@ export default function CodeEditor({ language, value, onChange, defaultCode }: C
     }
   };
 
-  const getDefaultValue = () => {
-    if (value) return value;
-    return defaultCode || `// Write your code here for ${language}`;
-  };
+
 
   return (
     <div className="h-full w-full">
