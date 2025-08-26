@@ -47,10 +47,10 @@ export const PROBLEMS: Problem[] = [
       cpp: "bool sleepIn(bool weekday, bool vacation) {\n    return !weekday || vacation;\n}"
     },
     testCases: [
-      { input: "False\nFalse", expectedOutput: "true" },
-      { input: "True\nFalse", expectedOutput: "false" },
-      { input: "False\nTrue", expectedOutput: "true" },
-      { input: "True\nTrue", expectedOutput: "true" }
+      { input: "False\nFalse", expectedOutput: "True" },
+      { input: "True\nFalse", expectedOutput: "False" },
+      { input: "False\nTrue", expectedOutput: "True" },
+      { input: "True\nTrue", expectedOutput: "True" }
     ],
     defaultCode: {
       python: `def sleep_in(weekday, vacation):
@@ -130,10 +130,10 @@ int main() {
       cpp: "bool monkeyTrouble(bool aSmile, bool bSmile) {\n    return aSmile == bSmile;\n}"
     },
     testCases: [
-      { input: "True\nTrue", expectedOutput: "true" },
-      { input: "False\nFalse", expectedOutput: "true" },
-      { input: "True\nFalse", expectedOutput: "false" },
-      { input: "False\nTrue", expectedOutput: "false" }
+      { input: "True\nTrue", expectedOutput: "True" },
+      { input: "False\nFalse", expectedOutput: "True" },
+      { input: "True\nFalse", expectedOutput: "False" },
+      { input: "False\nTrue", expectedOutput: "False" }
     ],
     defaultCode: {
       python: `def monkey_trouble(a_smile, b_smile):
@@ -374,13 +374,13 @@ int main() {
       cpp: "bool parrotTrouble(bool talking, int hour) {\n    return talking && (hour < 7 || hour > 20);\n}"
     },
     testCases: [
-      { input: "True\n6", expectedOutput: "true" },
-      { input: "True\n7", expectedOutput: "false" },
-      { input: "False\n6", expectedOutput: "false" },
-      { input: "True\n21", expectedOutput: "true" },
-      { input: "False\n21", expectedOutput: "false" },
-      { input: "True\n23", expectedOutput: "true" },
-      { input: "True\n20", expectedOutput: "false" }
+      { input: "True\n6", expectedOutput: "True" },
+      { input: "True\n7", expectedOutput: "False" },
+      { input: "False\n6", expectedOutput: "False" },
+      { input: "True\n21", expectedOutput: "True" },
+      { input: "False\n21", expectedOutput: "False" },
+      { input: "True\n23", expectedOutput: "True" },
+      { input: "True\n20", expectedOutput: "False" }
     ],
     defaultCode: {
       python: `def parrot_trouble(talking, hour):
@@ -624,10 +624,10 @@ int main() {
       cpp: "bool array123(vector<int>& nums) {\n    for (int i = 0; i < nums.size() - 2; i++) {\n        if (nums[i] == 1 && nums[i+1] == 2 && nums[i+2] == 3) {\n            return true;\n        }\n    }\n    return false;\n}"
     },
       testCases: [
-        { input: "1 1 2 3 1", expectedOutput: "true" },
-        { input: "1 1 2 4 1", expectedOutput: "false" },
-        { input: "1 1 2 1 2 3", expectedOutput: "true" },
-        { input: "3 2 1 2 3", expectedOutput: "true" }
+        { input: "1 1 2 3 1", expectedOutput: "True" },
+        { input: "1 1 2 4 1", expectedOutput: "False" },
+        { input: "1 1 2 1 2 3", expectedOutput: "True" },
+        { input: "3 2 1 2 3", expectedOutput: "True" }
       ],
       defaultCode: {
         python: `def array123(nums):

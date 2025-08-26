@@ -1,5 +1,7 @@
 'use client';
 
+import { useUser } from '@/lib/hooks/useUser';
+import { useQuery } from 'convex/react';
 import { useState } from 'react';
 import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
@@ -14,11 +16,26 @@ export default function ProblemsPage() {
   const [searchTerm, setSearchTerm] = useState('');
   const [difficultyFilter, setDifficultyFilter] = useState<string>('all');
   const [tagFilter, setTagFilter] = useState<string>('all');
+  const { userId, isLoaded } = useUser();
 
   const allProblems = getAllProblems();
   
   // Get all unique tags
   const allTags = Array.from(new Set(allProblems.flatMap(problem => problem.tags))).sort();
+
+  if (!userId) {
+    return (
+      <div className="min-h-screen bg-background flex items-center justify-center">
+        <div className="text-center">
+          <h1 className="text-2xl font-bold text-foreground mb-4">Please Sign In</h1>
+          <p className="text-muted-foreground mb-6">You need to be signed in to view the problems.</p>
+          <Link href="/">
+            <Button>Go to Home</Button>
+          </Link>
+        </div>
+      </div>
+    );
+  }
 
   // Filter problems based on search, difficulty, and tags
   const filteredProblems = allProblems.filter(problem => {

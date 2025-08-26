@@ -15,7 +15,9 @@ import {
   TrendingUp, 
   Calendar,
   Target,
-  Zap
+  Zap,
+  Sword,
+  Crown
 } from 'lucide-react';
 import Link from 'next/link';
 
@@ -25,6 +27,7 @@ export default function DashboardPage() {
   const userStats = useQuery(api.users.getUserStats, userId ? { userId } : "skip");
   const submissionStats = useQuery(api.submissions.getUserSubmissionStats, userId ? { userId } : "skip");
   const recentSubmissions = useQuery(api.submissions.getUserSubmissions, userId ? { userId } : "skip");
+  const arenaStats = useQuery(api.matches.getUserArenaStats, userId ? { userId } : "skip");
 
   if (!isLoaded) {
     return (
@@ -116,7 +119,7 @@ export default function DashboardPage() {
         </div>
 
         {/* Additional Stats */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-6 mb-6 sm:mb-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6 mb-6 sm:mb-8">
           <Card>
             <CardHeader>
               <CardTitle className="flex items-center gap-2">
@@ -139,6 +142,38 @@ export default function DashboardPage() {
                 <div className="flex justify-between">
                   <span>Average Time:</span>
                   <span className="font-semibold">{submissionStats?.averageTime || 0}s</span>
+                </div>
+              </div>
+            </CardContent>
+          </Card>
+
+          <Card>
+            <CardHeader>
+              <CardTitle className="flex items-center gap-2">
+                <Sword className="h-5 w-5 text-red-600" />
+                Arena Mode Stats
+              </CardTitle>
+            </CardHeader>
+            <CardContent>
+              <div className="space-y-3">
+                <div className="flex justify-between">
+                  <span>Total Matches:</span>
+                  <span className="font-semibold">{arenaStats?.totalMatches || 0}</span>
+                </div>
+                <Separator />
+                <div className="flex justify-between">
+                  <span>Wins:</span>
+                  <span className="font-semibold text-green-600">{arenaStats?.wins || 0}</span>
+                </div>
+                <Separator />
+                <div className="flex justify-between">
+                  <span>Win Rate:</span>
+                  <span className="font-semibold text-blue-600">{arenaStats?.winRate || 0}%</span>
+                </div>
+                <Separator />
+                <div className="flex justify-between">
+                  <span>Forfeits:</span>
+                  <span className="font-semibold text-red-600">{arenaStats?.forfeits || 0}</span>
                 </div>
               </div>
             </CardContent>
@@ -216,6 +251,18 @@ export default function DashboardPage() {
             <Button className="flex items-center gap-2">
               <Target className="h-4 w-4" />
               Practice Problems
+            </Button>
+          </Link>
+          <Link href="/arena">
+            <Button className="flex items-center gap-2">
+              <Sword className="h-4 w-4" />
+              Arena Mode
+            </Button>
+          </Link>
+          <Link href="/leaderboard">
+            <Button variant="outline" className="flex items-center gap-2">
+              <Crown className="h-4 w-4" />
+              Leaderboard
             </Button>
           </Link>
           <Link href="/">

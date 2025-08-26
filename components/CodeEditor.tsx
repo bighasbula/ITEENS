@@ -39,7 +39,7 @@ export default function CodeEditor({ language, value, onChange, defaultCode }: C
         height="100%"
         defaultLanguage={getLanguageId(language)}
         language={getLanguageId(language)}
-        value={getDefaultValue()}
+        value={value}
         onChange={(value) => onChange(value || '')}
         onMount={handleEditorDidMount}
         theme="vs-dark"

@@ -1,37 +1,3 @@
-# Cursor Rules for Coding Battles Platform
-
-## 🛠️ Tech Stack
-
-- **Frontend Framework**: [Next.js](https://nextjs.org/)
-- **Component Library**: [shadcn/ui](https://ui.shadcn.dev/)
-- **Code Editor**: [Monaco Editor](https://microsoft.github.io/monaco-editor/)
-- **Authentication**: [Clerk](https://clerk.dev/)
-- **Backend**: [Convex](https://convex.dev/) — for user data, submission storage, and logic
-
-- **Code Execution**: [Judge0](https://judge0.com/) 
-- **Deployment**: [Vercel](https://vercel.com/)
-
----
-
-## 💡 Core Feature (MVP)
-
-### 1. 🚀 Practice Mode
-- User selects their difficulty level (e.g., Beginner, Intermediate, Advanced)
-- A coding problem is selected from a **predefined set** stored in Convex
-- Each problem has:
-  - A prompt/description
-  - Language restriction (optional)
-  - One or more test inputs + expected outputs
-- User writes code in the **Monaco Editor**
-- Code is sent to the backend and executed using a code runner API (judge0)
-- Results are compared against expected outputs
-- If correct, the user is redirected to a success page showing:
-  - Performance metrics (execution time, memory usage)
-  - Pre-stored ideal solution in the user's language
-  - User's submitted code for comparison
-
----
-
 ## 🔜 Future Feature
 
 ### 2. ⚔️ Arena Mode (Coming later)
@@ -39,6 +5,7 @@
 - First correct submission wins
 - Realtime updates and scoreboard
 - Matchmaking by level
+- Uses Convex real-time subscriptions for state sync
 
 ---
 
@@ -53,24 +20,58 @@
   - Storing and fetching problems
   - Logging submissions and results
 
+  |Convex functions for multiplayer arena 1v1|
+  - **createMatch** → Creates a match room if no match exists for that level
+  - **joinMatch** → Joins the first open match (status = "waiting") for the same level
+  - **subscribeToMatch** → Real-time updates for match state (detect opponent join, status changes, winner, etc.)
+  - **updateMatchStatus** → Updates match state (in-progress, completed, etc.)
+
+
+
+- Judge0 API is used for code execution
+
 ---
 
 ## 🔄 MVP Roadmap
-- [ ] Setup Next.js with shadcn/ui, Clerk, and Convex
-- [ ] Build user onboarding and level selection UI
-- [ ] Create Convex schema for problems and user submissions
-- [ ] Build Practice Mode flow:
+### Practice Mode (Done or near-done)
+- [x] Setup Next.js with shadcn/ui, Clerk, and Convex
+- [x] Build user onboarding and level selection UI
+- [x] Create Convex schema for problems and user submissions
+- [x] Build Practice Mode flow:
   - Problem display
   - Monaco code editor
   - Submit to code execution API
   - Match output to expected
   - Redirect to success page with performance metrics
-- [ ] Display ideal solution and user's code
-- [ ] Prepare for future Arena Mode expansion
+- [x] Display ideal solution and user's code
+
+### Arena Mode (Current Focus)
+- [ done] Add Convex query to **find the first open match** for a given level
+- [done ] If **no open match exists**, create a new match room
+- [ done] Implement **joinMatch** mutation to fill the second player slot
+- [ done] Implement **subscribeToMatch** query for real-time updates
+- [ done] Build waiting screen that auto-updates when opponent joins
+- [ done] Check if user is already in match queue so no duplicates appear in the match, can be done by blocking action of user when the waiting screen appears, it should block users action and just give him the option to cancel search with the new cancel mutation in convex schema
+- [ done] Build anti - cheat. User automatically loses when redirects to other page or leaves the tab or if visibility of the tab is interrupted. Could be implemented using page visibility api. 
+- [ done] Add basic scoreboard and status updates
+
+- [done ] Integrate Judge0 for both players' submissions in the same match
+- [done ] Broadcast results and winner in real-time
+- [ done] Add Arena Mode stats to dashboard
+- [ done] Create leaderboard page with top 20 players by wins
+- [ done] Implement language preset functionality in Arena match code editor (auto-updates when language changes)
+- [ done] Show all available problems in Arena mode (8 total problems including Two Sum)
 
 ---
 
 ## 💬 Notes
 - Focus is on quality of user experience, not problem generation
-- Arena Mode logic and realtime functionality will be built in a future update, NOT NOW.
+- Focus is on **clean, isolated backend logic** per feature for easy scalability
+- Future updates will include:
+  - Level-based matchmaking refinement
+  - Spectator mode
+  - Reconnection handling
+- Keep backend logic clean and isolated per feature for future scalability
+
+  - Reconnection handling
 - Keep backend logic clean and isolated per feature for future scalability

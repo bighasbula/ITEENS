@@ -30,4 +30,22 @@ export default defineSchema({
     .index("by_problemId", ["problemId"])
     .index("by_userId_problemId", ["userId", "problemId"])
     .index("by_submittedAt", ["submittedAt"]),
+
+    matches: defineTable({
+      userId1: v.string(),
+      userId2: v.optional(v.string()),
+      problemId: v.string(),
+      status: v.string(), // "waiting", "in-progress", "completed", "forfeited"
+      createdAt: v.number(),
+      winnerId: v.optional(v.string()),
+      startedAt: v.optional(v.number()),
+      completedAt: v.optional(v.number()),
+      forfeitReason: v.optional(v.string()), // "left_page", "switched_tab", "left_match"
+    })
+    .index("by_userId1", ["userId1"])
+    .index("by_status", ["status"])
+    .index("by_problemId", ["problemId"])
+    .index("by_userId2", ["userId2"])
+    .index("by_userId1_status", ["userId1", "status"])
+    .index("by_userId2_status", ["userId2", "status"])
 });

@@ -44,6 +44,24 @@ export default function Navigation() {
               Dashboard
             </Button>
           </Link>
+          <Link href="/arena">
+            <Button 
+              variant={pathname.startsWith('/arena') ? 'default' : 'ghost'}
+              size="sm"
+              className={pathname.startsWith('/arena') ? '' : 'text-foreground hover:text-foreground'}
+            >
+              ⚔️ Arena
+            </Button>
+          </Link>
+          <Link href="/leaderboard">
+            <Button 
+              variant={pathname === '/leaderboard' ? 'default' : 'ghost'}
+              size="sm"
+              className={pathname === '/leaderboard' ? '' : 'text-foreground hover:text-foreground'}
+            >
+              Leaderboard
+            </Button>
+          </Link>
           <Link href="/about">
             <Button 
               variant={pathname === '/about' ? 'default' : 'ghost'}

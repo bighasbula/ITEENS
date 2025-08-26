@@ -91,14 +91,16 @@ function Content() {
           </div>
 
           {/* Bottom Row - Arena Mode card (full width) */}
-          <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border opacity-50">
-            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Arena Mode</h3>
+          <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
+            <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">⚔️ Arena Mode</h3>
             <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-              Real-time 1v1 coding battles. Coming soon!
+              Real-time 1v1 coding battles. Challenge other developers and see who solves it first!
             </p>
-            <Button className="w-full" disabled size="sm">
-              Coming Soon
-            </Button>
+            <Link href="/arena">
+              <Button className="w-full" size="sm">
+                Enter Arena
+              </Button>
+            </Link>
           </div>
         </div>
 
