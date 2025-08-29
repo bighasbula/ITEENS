@@ -10,10 +10,10 @@ import { useUser } from '@/lib/hooks/useUser'
 
 export default function Home() {
   return (
-    <div className="min-h-screen bg-background">
-      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
-        <div className="text-center mb-6 sm:mb-8">
-          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-3 sm:mb-4">Welcome to ITEENS</h1>
+    <div className="bg-background">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+        <div className="text-center mb-4 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
           <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
         </div>
 
@@ -21,7 +21,7 @@ export default function Home() {
           <Content />
         </Authenticated>
         <Unauthenticated>
-          <div className="text-center py-12 sm:py-20">
+          <div className="text-center py-8 sm:py-12">
             <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-3 sm:mb-4">
               Sign in to get started
             </h2>
@@ -48,23 +48,23 @@ function Content() {
   );
   
   return (
-    <div className="space-y-6 sm:space-y-8">
+    <div className="space-y-4 sm:space-y-6">
       {/* Header - Centered */}
       <div className="text-center">
-        <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-3 sm:mb-4">
+        <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
           Ready to Code?
         </h2>
-        <p className="text-muted-foreground mb-6 sm:mb-8 text-sm sm:text-base">
+        <p className="text-muted-foreground mb-4 sm:mb-6 text-sm sm:text-base">
           Choose your challenge and start coding!
         </p>
       </div>
 
       {/* Main Content - Responsive Layout */}
-      <div className="flex flex-col lg:flex-row gap-6 sm:gap-8">
+      <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
         {/* Left Column - Full width on mobile, 2/3 on desktop */}
-        <div className="w-full lg:w-2/3 space-y-4 sm:space-y-6">
+        <div className="w-full lg:w-2/3 space-y-3 sm:space-y-4">
           {/* Top Row - Responsive grid */}
-          <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 sm:gap-6">
+          <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
             <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Practice Mode</h3>
               <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">

@@ -36,6 +36,13 @@ function ProblemPageContent() {
   useEffect(() => {
     setStartTime(Date.now());
   }, []);
+
+  // Initialize code with default code when problem loads
+  useEffect(() => {
+    if (problem && problem.defaultCode && problem.defaultCode[language]) {
+      setCode(problem.defaultCode[language]);
+    }
+  }, [problem, language]);
   
   if (!problem) {
     return (

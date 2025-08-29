@@ -1,11 +1,11 @@
 // Judge0 Configuration
 export const JUDGE0_CONFIG = {
   // Service selection
-  SERVICE: 'rapidapi' as 'rapidapi' | 'railway' | 'local',
+  SERVICE: 'railway' as 'rapidapi' | 'railway' | 'local',
   
   // Service URLs
   RAPIDAPI_URL: 'https://judge0-ce.p.rapidapi.com',
-  RAILWAY_URL: 'https://worker-production-347a.up.railway.app',
+  RAILWAY_URL: process.env.NEXT_PUBLIC_RAILWAY_URL || '',
   LOCAL_URL: 'http://localhost:2358',
   
   // RapidAPI credentials
