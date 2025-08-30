@@ -78,7 +78,7 @@ function LandingPage() {
               <div className="bg-gradient-to-br from-purple-900 to-pink-900 rounded-lg shadow-2xl overflow-hidden aspect-video p-2 sm:p-4">
                 <div className="bg-gray-900 rounded-lg overflow-hidden w-full h-full">
                   <img 
-                    src="/images/landing-page/1v1-battles.jpg" 
+                    src="/images/landing-page/1v1-battles.JPG" 
                     alt="1v1 Coding Battle Demo"
                     className="w-full h-full object-cover"
                     loading="lazy"
@@ -186,7 +186,7 @@ function LandingPage() {
               <div className="bg-gradient-to-br from-purple-900 to-pink-900 rounded-lg shadow-2xl overflow-hidden aspect-video p-2 sm:p-4">
                 <div className="bg-gray-900 rounded-lg overflow-hidden w-full h-full">
                   <img 
-                    src="/images/landing-page/track-progress.jpg" 
+                    src="/images/landing-page/track-progress.JPG" 
                     alt="Progress Dashboard Demo"
                     className="w-full h-full object-cover"
                     loading="lazy"
