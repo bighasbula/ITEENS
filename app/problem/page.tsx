@@ -228,13 +228,13 @@ function ProblemPageContent() {
 
       {/* Main Content */}
       <div className="flex-1 flex flex-col lg:flex-row">
-        {/* Left Panel - Problem Description */}
+        {/* Problem Description - Full width on mobile, half width on desktop */}
         <div className="w-full lg:w-1/2 border-b lg:border-b-0 lg:border-r overflow-auto">
           <ProblemDescription problem={problem} />
         </div>
 
-        {/* Right Panel - Code Editor and Terminal */}
-        <div className="w-full lg:w-1/2 flex flex-col">
+        {/* Code Editor and Terminal - Full width on mobile, half width on desktop */}
+        <div className="w-full lg:w-1/2 flex flex-col flex-1">
           <Tabs defaultValue="editor" className="flex-1 flex flex-col">
             <TabsList className="grid w-full grid-cols-2">
               <TabsTrigger value="editor">Code</TabsTrigger>
