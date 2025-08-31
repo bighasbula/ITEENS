@@ -1,12 +1,12 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9" xmlns:news="http://www.google.com/schemas/sitemap-news/0.9" xmlns:xhtml="http://www.w3.org/1999/xhtml" xmlns:mobile="http://www.google.com/schemas/sitemap-mobile/1.0" xmlns:image="http://www.google.com/schemas/sitemap-image/1.1" xmlns:video="http://www.google.com/schemas/sitemap-video/1.1">
-<url><loc>https://yourdomain.com/about</loc><lastmod>2025-08-31T21:42:41.084Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/dashboard</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/demo-success</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/leaderboard</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/problems</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/problem</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/arena</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
-<url><loc>https://yourdomain.com/success</loc><lastmod>2025-08-31T21:42:41.085Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/arena</loc><lastmod>2025-08-31T21:48:54.086Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/demo-success</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/leaderboard</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/dashboard</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/success</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/problems</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/about</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
+<url><loc>https://iteensglobal.com/problem</loc><lastmod>2025-08-31T21:48:54.087Z</lastmod><changefreq>daily</changefreq><priority>0.7</priority></url>
 </urlset>
