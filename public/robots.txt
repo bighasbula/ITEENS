@@ -3,7 +3,7 @@ User-agent: *
 Allow: /
 
 # Host
-Host: https://iteensglobal.com
+Host: https://www.iteensglobal.com
 
 # Sitemaps
-Sitemap: https://iteensglobal.com/sitemap.xml
+Sitemap: https://www.iteensglobal.com/sitemap.xml
