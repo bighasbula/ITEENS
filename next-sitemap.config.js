@@ -1,6 +1,6 @@
 /** @type {import('next-sitemap').IConfig} */
 module.exports = {
-    siteUrl: 'https://yourdomain.com',
+    siteUrl: 'https://iteensglobal.com',
     generateRobotsTxt: true,
   };
   
