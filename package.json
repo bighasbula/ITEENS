@@ -6,7 +6,8 @@
     "dev": "next dev --turbopack",
     "build": "next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postbuild": "next-sitemap"
   },
   "dependencies": {
     "@clerk/nextjs": "^6.29.0",
@@ -22,7 +23,8 @@
     "clsx": "^2.1.1",
     "convex": "^1.25.4",
     "lucide-react": "^0.537.0",
-    "next": "15.4.6",
+    "next": "^15.5.2",
+    "next-sitemap": "^4.2.3",
     "react": "19.1.0",
     "react-dom": "19.1.0",
     "tailwind-merge": "^3.3.1"

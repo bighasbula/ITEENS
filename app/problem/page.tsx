@@ -62,6 +62,8 @@ function ProblemPageContent() {
     }
 
     setIsRunning(true);
+    console.log('Running code...');
+    console.log(code, language, problem.testCases[0].input);
     setOutput('Running code...\n');
 
     try {
