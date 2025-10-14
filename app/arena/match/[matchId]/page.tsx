@@ -13,6 +13,7 @@ import { PROBLEMS, getProblemById } from '@/lib/problems'
 import CodeEditor from '@/components/CodeEditor'
 import { Loader2, Trophy, Clock, AlertTriangle } from 'lucide-react'
 import { SupportedLanguage } from '@/lib/judge0'
+import { LANGUAGE_IDS } from '@/lib/judge0'
 
 interface Player {
   id: string
