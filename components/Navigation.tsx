@@ -5,6 +5,7 @@ import { usePathname } from 'next/navigation';
 import { Button } from '@/components/ui/button';
 import { UserButton } from '@clerk/nextjs';
 
+
 export default function Navigation() {
   const pathname = usePathname();
 
