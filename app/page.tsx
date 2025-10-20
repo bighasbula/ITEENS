@@ -8,6 +8,8 @@ import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useUser } from '@/lib/hooks/useUser'
 import { Users, Target, TrendingUp, Trophy, Sword, Code, BarChart3 } from 'lucide-react'
+import { useState, useEffect } from 'react'
+import Image from 'next/image'
 
 export default function Home() {
   return (
@@ -23,33 +25,96 @@ export default function Home() {
 }
 
 function LandingPage() {
+  const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  
+  const heroImages = [
+    '/images/people/IMG_9818.JPG', 
+    '/images/people/IMG_9833.JPG',
+    '/images/people/IMG_9927.JPG'
+  ]
+
+  useEffect(() => {
+    const interval = setInterval(() => {
+      setCurrentImageIndex((prevIndex) => (prevIndex + 1) % heroImages.length)
+    }, 5000) // 5 seconds delay
+
+    return () => clearInterval(interval)
+  }, [heroImages.length])
+
   return (
     <div className="min-h-screen">
       {/* Hero Section */}
-      <section className="relative bg-gradient-to-b from-purple-900 via-purple-800 to-purple-900 pt-14 text-white">
-        <div className="container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-24">
-          <div className="text-center max-w-4xl mx-auto">
-            <h1 className="text-3xl sm:text-5xl lg:text-6xl font-bold mb-4 sm:mb-6">
-              Welcome to ITEENS
-            </h1>
-            <p className="text-base sm:text-lg lg:text-xl font-semibold mb-2 sm:mb-3 text-purple-100">
-              Your competitive coding platform. Battle other developers, practice problems, and climb the leaderboard.
-            </p>
-            <p className="text-base sm:text-lg lg:text-xl mb-4 sm:mb-6 text-purple-100">
-              Ready to Code? Choose your challenge and start coding!
-            </p>
-            <div className="flex flex-col sm:flex-row gap-3 sm:gap-4 justify-center">
+      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
+        {/* Background Image Carousel */}
+        <div className="absolute inset-0 z-0">
+          {heroImages.map((image, index) => (
+            <div
+              key={index}
+              className={`absolute inset-0 transition-opacity duration-1000 ${
+                index === currentImageIndex ? 'opacity-100' : 'opacity-0'
+              }`}
+            >
+              <Image
+                src={image}
+                alt={`Hero background ${index + 1}`}
+                fill
+                className="object-cover w-full h-full"
+                priority={index === 0}
+              />
+              {/* Purple gradient overlay for better navigation visibility */}
+              <div className="absolute inset-0 bg-gradient-to-b from-purple-900/80 via-purple-800/60 to-black/70" />
+            </div>
+          ))}
+        </div>
+
+        {/* Content */}
+        <div className="relative z-10 container mx-auto px-4 sm:px-6 py-12 sm:py-16 lg:py-24">
+          <div className="text-center max-w-5xl mx-auto">
+            {/* Main Heading */}
+            <div className="mb-8 sm:mb-12">
+              <h1 className="text-3xl sm:text-6xl lg:text-6xl font-bold mb-6 sm:mb-8 leading-tight">
+                <span className="bg-gradient-to-r from-white via-purple-100 to-pink-100 bg-clip-text text-transparent">
+                <br />
+                  The coolest coding platform
+                </span>
+              </h1>
+              
+              <div className="space-y-4 sm:space-y-6">
+                <p className="text-lg sm:text-2xl lg:text-3xl font-semibold text-white/90 leading-relaxed">
+                  Battle other developers,
+                  practice problems, <br />
+                  and climb the leaderboard.
+                </p>
+                
+                <p className="text-base sm:text-xl lg:text-2xl text-white/80 max-w-3xl mx-auto leading-relaxed">
+                  Ready to Code? Choose your challenge and start rocking!
+                </p>
+              </div>
+            </div>
+
+            {/* CTA Buttons */}
+            <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-12">
               <SignInButton>
-                <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50 w-full sm:w-auto">
+                <Button 
+                  size="lg" 
+                  className="bg-white text-purple-700 hover:bg-purple-50 w-full sm:w-auto px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+                >
                   Enter Arena
                 </Button>
               </SignInButton>
             </div>
           </div>
         </div>
+
+        {/* Gradient Separator */}
+        <div className="absolute bottom-0 left-0 right-0 h-42 bg-gradient-to-b from-transparent via-purple-900/20 to-[#18181B] z-20"></div>
       </section>
 
       {/* Feature Section 1: Online 1v1 Coding Battles */}
+      <br />
+      <br />
+      <br />
+      <br />
       <section className="py-12 sm:py-16 lg:py-24 bg-background">
         <div className="container mx-auto px-4 sm:px-6">
           <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
@@ -57,11 +122,15 @@ function LandingPage() {
             <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
                 <Sword className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                  Online 1v1 Coding Battles
+
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground relative">
+                  <span className="relative z-10">Online 1v1 Coding Battles</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#4f2a70]/20 to-transparent blur-xl transform -skew-x-12 scale-210"></div>
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#4f2a70]/40 to-transparent blur-lg transform skew-x-6 scale-405"></div>
                 </h2>
+                
               </div>
-              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-foreground mb-6 sm:mb-8 leading-relaxed">
                 Challenge developers from around the world in intense 1v1 coding battles. 
                 Test your skills, learn new techniques, and prove you're the best coder 
                 in real-time competitions.
@@ -111,11 +180,15 @@ function LandingPage() {
             <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
                 <Target className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                  Practice Your Skills
+
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground relative">
+                  <span className="relative z-10">Practice Your Skills</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#4f2a70]/20 to-transparent blur-xl transform -skew-x-12 scale-110"></div>
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#4f2a70]/54 to-transparent blur-lg transform skew-x-6 scale-505"></div>
                 </h2>
+                
               </div>
-              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-foreground mb-6 sm:mb-8 leading-relaxed">
                 Sharpen your coding abilities with our extensive database of problems. 
                 From beginner-friendly challenges to advanced algorithms, practice at 
                 your own pace and build your expertise.
@@ -165,11 +238,15 @@ function LandingPage() {
             <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
                 <TrendingUp className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                  Track Your Progress
+
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground relative">
+                  <span className="relative z-10">Track Your Progress</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#4f2a70]/20 to-transparent blur-xl transform -skew-x-12 scale-110"></div>
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#4f2a70]/54 to-transparent blur-lg transform skew-x-6 scale-505"></div>
                 </h2>
+
               </div>
-              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-foreground mb-6 sm:mb-8 leading-relaxed">
                 Monitor your coding journey with detailed analytics. View your statistics, 
                 track improvement over time, and see your coding achievements with 
                 comprehensive progress tracking.
@@ -219,11 +296,15 @@ function LandingPage() {
             <div className="flex-1 text-center lg:text-left order-2 lg:order-1">
               <div className="flex items-center justify-center lg:justify-start gap-3 mb-4 sm:mb-6">
                 <Trophy className="h-6 w-6 sm:h-8 sm:w-8 text-purple-600" />
-                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground">
-                  Compete on the Leaderboard
+
+                <h2 className="text-2xl sm:text-3xl lg:text-4xl font-bold text-foreground relative">
+                  <span className="relative z-10">Compete on the Leaderboard</span>
+                  <div className="absolute inset-0 bg-gradient-to-r from-transparent via-[#4f2a70]/20 to-transparent blur-xl transform -skew-x-12 scale-110"></div>
+                  <div className="absolute inset-0 bg-gradient-to-l from-transparent via-[#4f2a70]/54 to-transparent blur-lg transform skew-x-6 scale-505"></div>
                 </h2>
+
               </div>
-              <p className="text-base sm:text-lg text-muted-foreground mb-6 sm:mb-8 leading-relaxed">
+              <p className="text-base sm:text-lg text-foreground mb-6 sm:mb-8 leading-relaxed">
                 Climb the ranks and establish yourself among the top battlers. Compete 
                 for the highest position on our global leaderboard and earn recognition 
                 for your coding prowess.
@@ -266,7 +347,7 @@ function LandingPage() {
       </section>
 
       {/* CTA Section */}
-      <section className="py-16 sm:py-24 bg-gradient-to-br from-purple-900 via-purple-800 to-purple-700 text-white">
+      <section className="py-16 sm:py-24 bg-gradient-to-br text-white">
         <div className="container mx-auto px-4 sm:px-6 text-center">
           <h2 className="text-3xl sm:text-4xl font-bold mb-6">
             Ready to Start Your Coding Journey?
@@ -275,7 +356,7 @@ function LandingPage() {
             Join thousands of developers who are already competing, learning, and growing on ITEENS.
           </p>
           <SignInButton>
-            <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50">
+            <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50 hover:opacity-85 transition-opacity">
               Get Started Now
             </Button>
           </SignInButton>
@@ -284,6 +365,10 @@ function LandingPage() {
     </div>
   )
 }
+
+
+
+
 
 function Content() {
   const { userId } = useUser();

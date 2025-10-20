@@ -79,9 +79,11 @@ export default function Navigation() {
         "
       >
         {/* Left: Brand */}
-        <Link href="/" className="font-bold text-2xl md:text-4xl text-white flex items-center gap-2">
-          <img src="/favicon.ico" alt="ITEENS Logo" className="w-9 h-9 md:w-11 md:h-11" />
-          ITEENS
+        <Link href="/" className="font-bold text-2xl md:text-4xl text-white flex items-center gap-2 hover:opacity-90 transition-opacity">
+          <div className="flex items-center gap-2 w-full"> {/* Added wrapper div to fix clickability */}
+            <img src="/favicon.ico" alt="ITEENS Logo" className="w-9 h-9 md:w-11 md:h-11" />
+            ITEENS
+          </div>
         </Link>
 
         {/*  Center: Desktop links  */}

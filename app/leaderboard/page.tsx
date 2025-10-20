@@ -28,6 +28,18 @@ export default function LeaderboardPage() {
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
             <Crown className="h-8 w-8 sm:h-12 sm:w-12 text-yellow-500" />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
+            <br />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Arena Leaderboard</h1>
           </div>
           <p className="text-lg sm:text-xl font-bold text-muted-foreground">Top 20 players by wins</p>

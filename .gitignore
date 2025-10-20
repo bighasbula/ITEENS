@@ -28,15 +28,16 @@ yarn-debug.log*
 yarn-error.log*
 .pnpm-debug.log*
 
-# env files (can opt-in for committing if needed)
+# env files
 .env*
 
 # vercel
 .vercel
 
-# typescript
 *.tsbuildinfo
 next-env.d.ts
+.cursor/
+/public
 
-# clerk configuration (can include secrets)
+# clerk configuration
 /.clerk/
