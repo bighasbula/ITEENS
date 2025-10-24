@@ -51,6 +51,7 @@ export default function AboutPage() {
          {/* What is ITEENS Section */}
          <section className="mb-12 sm:mb-16">
            <h1 className="text-3xl sm:text-4xl md:text-5xl font-bold text-white text-center mb-6 sm:mb-8">
+             <br />
              What is ITEENS
            </h1>
            
@@ -78,6 +79,7 @@ export default function AboutPage() {
                  {/* Meet our team Section */}
          <section>
            <h2 className="text-3xl sm:text-4xl md:text-5xl font-bold text-primaryPurple text-center mb-8 sm:mb-12">
+             <br />
              Meet our team
            </h2>
            
