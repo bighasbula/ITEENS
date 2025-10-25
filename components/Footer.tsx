@@ -25,7 +25,6 @@ export default function Footer() {
       <br />
 
       <div className="flex justify-center items-center gap-3">
-        <span style={{ fontSize: "1rem" }}>number: +7 777 772 1414</span>
         <span style={{ fontSize: "1rem" }}>&nbsp;&nbsp;&nbsp;email: iteens.kz@yandex.kz</span>
       </div>
 
