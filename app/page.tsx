@@ -378,7 +378,7 @@ function Content() {
   );
   
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6">
+    <div className="container mx-auto px-4 sm:px-6 py-16 sm:py-6">
       <div className="text-center mb-4 sm:mb-6">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
         <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
