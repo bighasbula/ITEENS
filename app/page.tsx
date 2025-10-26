@@ -378,7 +378,7 @@ function Content() {
   );
   
   return (
-    <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-20">
+    <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-27">
       <div className="text-center mb-4 sm:mb-6">
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
         <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
@@ -396,7 +396,7 @@ function Content() {
         </div>
 
         {/* Main Content - Responsive Layout */}
-        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
+        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6 mt-27">
           {/* Left Column - Full width on mobile, 2/3 on desktop */}
           <div className="w-full lg:w-2/3 space-y-3 sm:space-y-4">
             {/* Top Row - Responsive grid */}
