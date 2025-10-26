@@ -384,7 +384,7 @@ function Content() {
         <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
       </div>
 
-      <div className="space-y-4 sm:space-y-6">
+      <div className="space-y-4 sm:space-y-6 mt-28">
         {/* Header - Centered */}
         <div className="text-center">
           <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
