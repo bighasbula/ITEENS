@@ -93,11 +93,11 @@ export default function LeaderboardPage() {
                     </div>
 
                     {/* Stats */}
-                    <div className="flex items-center gap-4">
+                    <div className="flex items-center gap-4 text-[#68169b]">
                       <div className="text-right text-[#68169b]">
                         <div className="flex items-center gap-2">
                           <Trophy className="h-4 w-4 text-yellow-600" />
-                          <span className="font-bold text-lg">{player.wins}</span>
+                          <span className="font-bold text-lg text-[#68169b]">{player.wins}</span>
                         </div>
                         <p className="text-xs text-[#68169b]">wins</p>
                       </div>
