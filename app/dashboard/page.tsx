@@ -88,7 +88,7 @@ export default function DashboardPage() {
                 <TrendingUp className="h-5 w-5 text-white" />
                 <span className="font-semibold">Current Streak</span>
               </div>
-              <p className="text-3xl font-bold text-primary">
+              <p className="text-3xl font-bold">
                 {userStats?.currentStreak || 0}
               </p>
               <p className="text-sm text-muted-foreground font-semibold mt-1">consecutive days</p>
@@ -138,7 +138,7 @@ export default function DashboardPage() {
                 <Separator />
                 <div className="flex justify-between">
                   <span>Correct Submissions:</span>
-                  <span className="font-semibold text-green-600">{submissionStats?.correctSubmissions || 0}</span>
+                  <span className="font-semibold text-white">{submissionStats?.correctSubmissions || 0}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
@@ -165,17 +165,17 @@ export default function DashboardPage() {
                 <Separator />
                 <div className="flex justify-between">
                   <span>Wins:</span>
-                  <span className="font-semibold text-green-600">{arenaStats?.wins || 0}</span>
+                  <span className="font-semibold text-white">{arenaStats?.wins || 0}</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
                   <span>Win Rate:</span>
-                  <span className="font-semibold text-blue-600">{arenaStats?.winRate || 0}%</span>
+                  <span className="font-semibold text-white">{arenaStats?.winRate || 0}%</span>
                 </div>
                 <Separator />
                 <div className="flex justify-between">
                   <span>Forfeits:</span>
-                  <span className="font-semibold text-red-600">{arenaStats?.forfeits || 0}</span>
+                  <span className="font-semibold text-white">{arenaStats?.forfeits || 0}</span>
                 </div>
               </div>
             </CardContent>

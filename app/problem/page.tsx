@@ -188,7 +188,7 @@ function ProblemPageContent() {
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Problem Header */}
-      <div className="border-b border-border bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/5">
+      <div className="border-b border-border bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/5 mt-22">
         <div className="flex flex-col sm:flex-row h-auto sm:h-14 items-start sm:items-center px-3 sm:px-4 gap-2 sm:gap-4 py-2 sm:py-0">
           <div className="flex items-center gap-2 w-full sm:w-auto">
             <h1 className="text-base sm:text-lg font-semibold truncate">{problem.name}</h1>
