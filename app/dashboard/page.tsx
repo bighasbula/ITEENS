@@ -60,7 +60,7 @@ export default function DashboardPage() {
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-            <Trophy className="h-8 w-8 sm:h-12 sm:w-12 text-accent" />
+            <Trophy className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Your Dashboard</h1>
           </div>
           <p className="text-lg sm:text-xl font-bold text-muted-foreground">Track your coding progress and achievements</p>
