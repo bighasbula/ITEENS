@@ -137,9 +137,11 @@ export default function ArenaPage() {
           <h1 className="text-4xl font-bold text-foreground mb-4">
             ⚔️ Arena Mode
           </h1>
+          <br />
           <p className="text-xl text-muted-foreground">
             Challenge other developers in real-time 1v1 coding battles
           </p>
+          <br />
         </div>
 
         {/* Error Display */}
