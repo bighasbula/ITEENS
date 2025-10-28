@@ -73,7 +73,6 @@ export default function ProblemsPage() {
 
         <br />
         <br />
-        <br />
 
         {/* Filters */}
         <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8 border border-border">

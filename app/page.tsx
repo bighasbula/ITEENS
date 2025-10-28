@@ -390,12 +390,9 @@ function Content() {
         {/* Header - Centered */}
         <div className="text-center">
           <br />
-          <br />
-          <br />
           <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
             Choose a problem and master your problem solving skills!
           </h2>
-          <br />
           <br />
           <br />
         </div>

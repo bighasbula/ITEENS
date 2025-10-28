@@ -63,7 +63,9 @@ export default function DashboardPage() {
             <Trophy className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Your Dashboard</h1>
           </div>
+          <br />
           <p className="text-lg sm:text-xl font-bold text-muted-foreground">Track your coding progress and achievements</p>
+          <br />
         </div>
 
         {/* Main Stats Grid */}
