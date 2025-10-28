@@ -389,7 +389,6 @@ function Content() {
       <div className="space-y-4 sm:space-y-6 mt-28">
         {/* Header - Centered */}
         <div className="text-center">
-          <br />
           <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
             Choose a problem and master your problem solving skills!
           </h2>
@@ -403,7 +402,7 @@ function Content() {
           <div className="w-full lg:w-2/3 space-y-3 sm:space-y-4">
             {/* Top Row - Responsive grid */}
             <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
+              <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Practice Mode</h3>
                 <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                   Solve coding problems at your own pace. Get instant feedback and AI-powered code analysis.
@@ -415,7 +414,7 @@ function Content() {
                 </Link>
               </div>
 
-              <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
+              <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
                 <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Your Dashboard</h3>
                 <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                   Track your progress, view statistics, and see your coding achievements.
@@ -429,7 +428,7 @@ function Content() {
             </div>
 
             {/* Bottom Row - Arena Mode card (full width) */}
-            <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
+            <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">⚔️ Arena Mode</h3>
               <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
                 Real-time 1v1 coding battles. Challenge other developers and see who solves it first!
@@ -444,7 +443,7 @@ function Content() {
 
           {/* Right Column - Full width on mobile, 1/3 on desktop */}
           <div className="w-full lg:w-1/3">
-            <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border h-full">
+            <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border h-full">
               <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-card-foreground">Recent Activity</h3>
               <div className="text-muted-foreground">
                 {recentSubmissions && recentSubmissions.length > 0 ? (
