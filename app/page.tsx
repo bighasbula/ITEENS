@@ -381,21 +381,11 @@ function Content() {
     <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-28">
       <div className="text-center mb-4 sm:mb-6">
         <br />
-        <br />
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
         <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
       </div>
 
       <div className="space-y-4 sm:space-y-6 mt-28">
-        {/* Header - Centered */}
-        <div className="text-center">
-          <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
-            Choose a problem and master your problem solving skills!
-          </h2>
-          <br />
-          <br />
-        </div>
-
         {/* Main Content - Responsive Layout */}
         <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
           {/* Left Column - Full width on mobile, 2/3 on desktop */}
@@ -428,6 +418,7 @@ function Content() {
             </div>
 
             {/* Bottom Row - Arena Mode card (full width) */}
+            <br />
             <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
               <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">⚔️ Arena Mode</h3>
               <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
