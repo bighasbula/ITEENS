@@ -60,7 +60,7 @@ html, body {
   --arena-secondary-purple: #68169b;
   --arena-accent-pink: #1a051f;
   --arena-text-dark: #5d3eb4;
-  --arena-text-muted: #4d4857;
+  --arena-text-muted: #ffffff;
   
   /* Override default theme with our colors */
   --background: var(--arena-background);

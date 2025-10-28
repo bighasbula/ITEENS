@@ -67,19 +67,22 @@ export default function ProblemsPage() {
           <p className="text-lg sm:text-xl text-muted-foreground">Choose a problem to solve and improve your coding skills</p>
         </div>
 
+
         {/* Filters */}
         <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8 border border-border">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
+            
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-muted-foreground h-4 w-4" />
+              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white h-4 w-4" />
               <Input
                 placeholder="Search problems..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10"
+                className="pl-10 bg-transparent text-white placeholder-white border-white focus:border-white focus:ring-white"
               />
             </div>
+
 
             {/* Difficulty Filter */}
             <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
