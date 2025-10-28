@@ -84,8 +84,8 @@ export default function LeaderboardPage() {
                       </div>
 
                       {/* Player Info */}
-                      <div>
-                        <h3 className="font-semibold text-lg">{player.username}</h3>
+                      <div className='text-[#68169b]'>
+                        <h3 className="font-semibold text-lg text-[#68169b]">{player.username}</h3>
                         <p className="text-sm text-[#68169b]">
                           Joined {player.joinedAt ? new Date(player.joinedAt).toLocaleDateString() : 'N/A'}
                         </p>
