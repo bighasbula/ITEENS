@@ -76,7 +76,7 @@ html, body {
   --muted: var(--arena-secondary-purple);
   --muted-foreground: var(--arena-text-muted);
   --accent: var(--arena-accent-pink);
-  --accent-foreground: #278d3d;
+  --accent-foreground: #ffffff;
   --destructive: oklch(0.577 0.245 27.325);
   --border: var(--arena-secondary-purple);
   --input: var(--arena-secondary-purple);

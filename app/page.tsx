@@ -1,31 +1,24 @@
 'use client'
 
-import { Authenticated, Unauthenticated } from 'convex/react'
 import { SignInButton } from '@clerk/nextjs'
-import { useQuery } from 'convex/react'
-import { api } from '../convex/_generated/api'
 import { Button } from '@/components/ui/button'
 import Link from 'next/link'
 import { useUser } from '@/lib/hooks/useUser'
-import { Users, Target, TrendingUp, Trophy, Sword, Code, BarChart3 } from 'lucide-react'
+import { Target, TrendingUp, Trophy, Sword, Code, BarChart3 } from 'lucide-react'
 import { useState, useEffect } from 'react'
 import Image from 'next/image'
 
 export default function Home() {
   return (
     <div className="bg-background">
-      <Authenticated>
-        <Content />
-      </Authenticated>
-      <Unauthenticated>
-        <LandingPage />
-      </Unauthenticated>
+      <LandingPage />
     </div>
   )
 }
 
 function LandingPage() {
   const [currentImageIndex, setCurrentImageIndex] = useState(0)
+  const { userId } = useUser()
   
   const heroImages = [
     '/images/people/IMG_9818.JPG', 
@@ -94,14 +87,25 @@ function LandingPage() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4 sm:gap-6 justify-center items-center mb-8 sm:mb-12">
-              <SignInButton>
-                <Button 
-                  size="lg" 
-                  className="bg-white text-purple-700 hover:bg-purple-50 w-full sm:w-auto px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
-                >
-                  Enter Arena
-                </Button>
-              </SignInButton>
+              {userId ? (
+                <Link href="/arena">
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-purple-700 hover:bg-purple-50 w-full sm:w-auto px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    Enter Arena
+                  </Button>
+                </Link>
+              ) : (
+                <SignInButton>
+                  <Button 
+                    size="lg" 
+                    className="bg-white text-purple-700 hover:bg-purple-50 w-full sm:w-auto px-8 py-4 text-lg font-semibold shadow-2xl hover:shadow-3xl transform hover:scale-105 transition-all duration-300"
+                  >
+                    Enter Arena
+                  </Button>
+                </SignInButton>
+              )}
             </div>
           </div>
         </div>
@@ -135,11 +139,19 @@ function LandingPage() {
                 Test your skills, learn new techniques, and prove you're the best coder 
                 in real-time competitions.
               </p>
-              <SignInButton>
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
-                  Join Live Battle
-                </Button>
-              </SignInButton>
+              {userId ? (
+                <Link href="/arena">
+                  <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    Join Live Battle
+                  </Button>
+                </Link>
+              ) : (
+                <SignInButton>
+                  <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    Join Live Battle
+                  </Button>
+                </SignInButton>
+              )}
             </div>
             
             {/* Image Frame */}
@@ -251,11 +263,19 @@ function LandingPage() {
                 track improvement over time, and see your coding achievements with 
                 comprehensive progress tracking.
               </p>
-              <SignInButton>
-                <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
-                  View Dashboard
-                </Button>
-              </SignInButton>
+              {userId ? (
+                <Link href="/dashboard">
+                  <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    View Dashboard
+                  </Button>
+                </Link>
+              ) : (
+                <SignInButton>
+                  <Button size="lg" className="bg-purple-600 hover:bg-purple-700 w-full sm:w-auto">
+                    View Dashboard
+                  </Button>
+                </SignInButton>
+              )}
             </div>
             
             {/* Image Frame */}
@@ -355,11 +375,19 @@ function LandingPage() {
           <p className="text-xl mb-8 text-purple-100 max-w-2xl mx-auto">
             Join thousands of developers who are already competing, learning, and growing on ITEENS.
           </p>
-          <SignInButton>
-            <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50 hover:opacity-85 transition-opacity">
-              Get Started Now
-            </Button>
-          </SignInButton>
+          {userId ? (
+            <Link href="/arena">
+              <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50 hover:opacity-85 transition-opacity">
+                Get Started Now
+              </Button>
+            </Link>
+          ) : (
+            <SignInButton>
+              <Button size="lg" className="bg-white text-purple-700 hover:bg-purple-50 hover:opacity-85 transition-opacity">
+                Get Started Now
+              </Button>
+            </SignInButton>
+          )}
         </div>
       </section>
     </div>
@@ -369,99 +397,3 @@ function LandingPage() {
 
 
 
-
-function Content() {
-  const { userId } = useUser();
-  const recentSubmissions = useQuery(
-    api.submissions.getUserSubmissions, 
-    userId ? { userId } : "skip"
-  );
-  
-  return (
-    <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-28">
-      <div className="text-center mb-4 sm:mb-6">
-        <br />
-        <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
-        <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
-      </div>
-
-      <div className="space-y-4 sm:space-y-6 mt-28">
-        {/* Main Content - Responsive Layout */}
-        <div className="flex flex-col lg:flex-row gap-4 sm:gap-6">
-          {/* Left Column - Full width on mobile, 2/3 on desktop */}
-          <div className="w-full lg:w-2/3 space-y-3 sm:space-y-4">
-            {/* Top Row - Responsive grid */}
-            <div className="grid grid-cols-1 sm:grid-cols-2 gap-3 sm:gap-4">
-              <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Practice Mode</h3>
-                <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-                  Solve coding problems at your own pace. Get instant feedback and AI-powered code analysis.
-                </p>
-                <Link href="/problems">
-                  <Button className="w-full" variant="outline" size="sm">
-                    Browse Problems
-                  </Button>
-                </Link>
-              </div>
-
-              <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
-                <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">Your Dashboard</h3>
-                <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-                  Track your progress, view statistics, and see your coding achievements.
-                </p>
-                <Link href="/dashboard">
-                  <Button className="w-full" variant="outline" size="sm">
-                    View Dashboard
-                  </Button>
-                </Link>
-              </div>
-            </div>
-
-            {/* Bottom Row - Arena Mode card (full width) */}
-            <br />
-            <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border card-hover">
-              <h3 className="text-lg sm:text-xl font-semibold mb-2 sm:mb-3 text-card-foreground">⚔️ Arena Mode</h3>
-              <p className="text-muted-foreground mb-3 sm:mb-4 text-sm sm:text-base">
-                Real-time 1v1 coding battles. Challenge other developers and see who solves it first!
-              </p>
-              <Link href="/arena">
-                <Button className="w-full" variant="outline" size="sm">
-                  Enter Arena
-                </Button>
-              </Link>
-            </div>
-          </div>
-
-          {/* Right Column - Full width on mobile, 1/3 on desktop */}
-          <div className="w-full lg:w-1/3">
-            <div className="max-w-sm mx-auto bg-card rounded-lg shadow-md p-4 sm:p-6 border border-border h-full">
-              <h3 className="text-xl sm:text-2xl font-semibold mb-3 sm:mb-4 text-card-foreground">Recent Activity</h3>
-              <div className="text-muted-foreground">
-                {recentSubmissions && recentSubmissions.length > 0 ? (
-                  <div>
-                    <p className="mb-2 text-sm sm:text-base">You have {recentSubmissions.length} recent submissions</p>
-                    <div className="text-xs sm:text-sm space-y-1">
-                      {recentSubmissions.slice(0, 3).map((submission, index) => (
-                        <div key={index} className="flex items-center gap-2">
-                          <span className={`w-2 h-2 rounded-full ${
-                            submission.isCorrect ? 'bg-green-500' : 'bg-red-500'
-                          }`}></span>
-                          <span>
-                            {submission.isCorrect ? '✅' : '❌'} Problem {submission.problemId} 
-                            ({submission.timeTaken}s)
-                          </span>
-                        </div>
-                      ))}
-                    </div>
-                  </div>
-                ) : (
-                  <p className="text-sm sm:text-base">No recent activity. Start coding to see your progress!</p>
-                )}
-              </div>
-            </div>
-          </div>
-        </div>
-      </div>
-    </div>
-  )
-}
