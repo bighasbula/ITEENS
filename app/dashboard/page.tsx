@@ -85,7 +85,7 @@ export default function DashboardPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 mb-2">
-                <TrendingUp className="h-5 w-5 text-primary" />
+                <TrendingUp className="h-5 w-5 text-white" />
                 <span className="font-semibold">Current Streak</span>
               </div>
               <p className="text-3xl font-bold text-primary">
@@ -98,7 +98,7 @@ export default function DashboardPage() {
           <Card>
             <CardContent className="pt-6">
               <div className="flex items-center gap-2 mb-2">
-                <Target className="h-5 w-5 text-secondary" />
+                <Target className="h-5 w-5 text-secondary text-accent" />
                 <span className="font-semibold">Success Rate</span>
               </div>
               <p className="text-3xl font-bold ">
