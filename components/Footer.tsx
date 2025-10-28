@@ -17,6 +17,8 @@ export default function Footer() {
       <br />
       <br />
       <br />
+      <br />
+      <br />
       All rights reserved © 2025 ITEENS
       <br />
       <br />
