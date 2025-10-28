@@ -380,6 +380,8 @@ function Content() {
   return (
     <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-6 mt-28">
       <div className="text-center mb-4 sm:mb-6">
+        <br />
+        <br />
         <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground mb-2 sm:mb-3">Welcome to ITEENS</h1>
         <p className="text-lg sm:text-xl font-semibold text-muted-foreground">Your competitive coding platform</p>
       </div>
@@ -387,12 +389,15 @@ function Content() {
       <div className="space-y-4 sm:space-y-6 mt-28">
         {/* Header - Centered */}
         <div className="text-center">
+          <br />
+          <br />
+          <br />
           <h2 className="text-xl sm:text-2xl font-semibold text-foreground mb-2 sm:mb-3">
-            Ready to Code?
+            Choose a problem and master your problem solving skills!
           </h2>
-          <p className="text-muted-foreground mb-4 sm:mb-6 text-sm sm:text-base">
-            Choose your challenge and start coding!
-          </p>
+          <br />
+          <br />
+          <br />
         </div>
 
         {/* Main Content - Responsive Layout */}
@@ -433,7 +438,7 @@ function Content() {
                 Real-time 1v1 coding battles. Challenge other developers and see who solves it first!
               </p>
               <Link href="/arena">
-                <Button className="w-full" size="sm">
+                <Button className="w-full" variant="outline" size="sm">
                   Enter Arena
                 </Button>
               </Link>

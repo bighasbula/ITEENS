@@ -62,16 +62,23 @@ export default function ProblemsPage() {
         <div className="text-center mb-6 sm:mb-8">
           <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
             <Target className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
+            <br />
+            <br />
+            <br />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Practice Problems</h1>
           </div>
+          <br />
           <p className="text-lg sm:text-xl text-muted-foreground">Choose a problem to solve and improve your coding skills</p>
         </div>
 
+        <br />
+        <br />
+        <br />
 
         {/* Filters */}
         <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8 border border-border">
           <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-            
+
             {/* Search */}
             <div className="relative">
               <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white h-4 w-4" />
@@ -86,7 +93,8 @@ export default function ProblemsPage() {
 
             {/* Difficulty Filter */}
             <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-              <SelectTrigger>
+              <SelectTrigger className="text-white border-white bg-transparent focus:border-white focus:ring-white"
+              >
                 <SelectValue placeholder="Difficulty" />
               </SelectTrigger>
               <SelectContent>
@@ -99,7 +107,8 @@ export default function ProblemsPage() {
 
             {/* Tag Filter */}
             <Select value={tagFilter} onValueChange={setTagFilter}>
-              <SelectTrigger>
+              <SelectTrigger className="text-white border-white bg-transparent focus:border-white focus:ring-white"
+              >
                 <SelectValue placeholder="Tags" />
               </SelectTrigger>
               <SelectContent>
