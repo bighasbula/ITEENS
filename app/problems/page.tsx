@@ -56,7 +56,7 @@ export default function ProblemsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-24 sm:pt-28">
       <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
         {/* Header */}
         <div className="text-center mb-6 sm:mb-8">
