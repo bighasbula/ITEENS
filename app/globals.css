@@ -57,7 +57,7 @@ html, body {
       /* Custom ARENA color palette */
   --arena-background: #18181b;
   --arena-primary-purple: #68169b;
-  --arena-secondary-purple: #180820;
+  --arena-secondary-purple: #5d3eb4;
   --arena-accent-pink: #1a051f;
   --arena-text-dark: #5d3eb4;
   --arena-text-muted: #4d4857;
@@ -66,13 +66,13 @@ html, body {
   --background: var(--arena-background);
   --foreground: #ffffff;
   --card: var(--arena-secondary-purple);
-  --card-foreground: #b999b9;
+  --card-foreground: #ffffff;
   --popover: var(--arena-secondary-purple);
-  --popover-foreground: #906abd88;
+  --popover-foreground: #ffffff;
   --primary: var(--arena-primary-purple);
   --primary-foreground: #ffffff;
   --secondary: var(--arena-secondary-purple);
-  --secondary-foreground: #f10a0a;
+  --secondary-foreground: #ffffff;
   --muted: var(--arena-secondary-purple);
   --muted-foreground: var(--arena-text-muted);
   --accent: var(--arena-accent-pink);
