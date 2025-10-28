@@ -86,7 +86,7 @@ export default function LeaderboardPage() {
                       {/* Player Info */}
                       <div>
                         <h3 className="font-semibold text-lg">{player.username}</h3>
-                        <p className="text-sm">
+                        <p className="text-sm text-[#68169b]">
                           Joined {player.joinedAt ? new Date(player.joinedAt).toLocaleDateString() : 'N/A'}
                         </p>
                       </div>
@@ -94,12 +94,12 @@ export default function LeaderboardPage() {
 
                     {/* Stats */}
                     <div className="flex items-center gap-4">
-                      <div className="text-right">
+                      <div className="text-right text-[#68169b]">
                         <div className="flex items-center gap-2">
                           <Trophy className="h-4 w-4 text-yellow-600" />
                           <span className="font-bold text-lg">{player.wins}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">wins</p>
+                        <p className="text-xs text-[#68169b]">wins</p>
                       </div>
                       
                       <Separator orientation="vertical" className="h-8" />
@@ -109,7 +109,7 @@ export default function LeaderboardPage() {
                           <TrendingUp className="h-4 w-4 text-green-600" />
                           <span className="font-bold text-lg">{player.winRate}%</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">win rate</p>
+                        <p className="text-xs text-[#68169b]">win rate</p>
                       </div>
                       
                       <Separator orientation="vertical" className="h-8" />
@@ -119,7 +119,7 @@ export default function LeaderboardPage() {
                           <Users className="h-4 w-4 text-blue-600" />
                           <span className="font-bold text-lg">{player.totalMatches}</span>
                         </div>
-                        <p className="text-xs text-muted-foreground">matches</p>
+                        <p className="text-xs text-[#68169b]">matches</p>
                       </div>
                     </div>
                   </div>
