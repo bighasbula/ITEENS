@@ -130,30 +130,28 @@ export default function ArenaPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background pt-24 sm:pt-28">
-      <div className="container mx-auto px-4 py-8">
+    <div className="min-h-screen bg-background pt-20 sm:pt-24">
+      <div className="container mx-auto px-4 sm:px-6 py-5 sm:py-6 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-8">
-          <h1 className="text-4xl font-bold text-foreground mb-4">
+        <div className="text-center mb-5 sm:mb-6">
+          <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading text-foreground mb-2 sm:mb-3">
             ⚔️ Arena Mode
           </h1>
-          <br />
-          <p className="text-xl text-muted-foreground">
+          <p className="text-sm sm:text-base text-muted-foreground font-body">
             Challenge other developers in real-time 1v1 coding battles
           </p>
-          <br />
         </div>
 
         {/* Error Display */}
         {error && (
-          <div className="mb-6 p-4 bg-destructive/10 border border-destructive/20 rounded-lg flex items-center gap-2">
-            <AlertCircle className="h-4 w-4 text-destructive" />
-            <span className="text-destructive text-sm">{error}</span>
+          <div className="mb-4 p-3 bg-destructive/10 border border-destructive/20 rounded-md flex items-center gap-2">
+            <AlertCircle className="h-3.5 w-3.5 text-destructive" />
+            <span className="text-destructive text-xs sm:text-sm font-body">{error}</span>
             <Button 
               variant="ghost" 
               size="sm" 
               onClick={() => setError(null)}
-              className="ml-auto text-destructive hover:text-destructive/80"
+              className="ml-auto text-destructive hover:text-destructive/80 h-6 w-6 p-0"
             >
               ×
             </Button>
@@ -163,13 +161,13 @@ export default function ArenaPage() {
         {/* Searching Overlay */}
         {isSearching && (
           <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
-            <Card className="w-full max-w-md">
-              <CardHeader className="text-center">
-                <div className="flex justify-center mb-4">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <Card className="w-full max-w-md card-hover border-border/50 bg-card/90 backdrop-blur-md">
+              <CardHeader className="text-center pb-3">
+                <div className="flex justify-center mb-3">
+                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
                 </div>
-                <CardTitle>Finding Opponent...</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-base font-heading">Finding Opponent...</CardTitle>
+                <CardDescription className="text-xs sm:text-sm font-body">
                   Looking for someone to challenge on &quot;{PROBLEMS.find(p => p.id === selectedProblem)?.name}&quot;
                 </CardDescription>
               </CardHeader>
@@ -177,6 +175,7 @@ export default function ArenaPage() {
                 <Button 
                   variant="outline" 
                   onClick={handleCancelSearch}
+                  className="text-xs sm:text-sm h-8 hover:scale-[1.02] transition-transform"
                 >
                   Cancel Search
                 </Button>
@@ -185,26 +184,26 @@ export default function ArenaPage() {
           </div>
         )}
 
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8">
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-4 sm:gap-6">
           {/* Available Problems */}
           <div className="lg:col-span-2">
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Zap className="h-5 w-5" />
+            <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Zap className="h-4 w-4 text-yellow-500" />
                   Available Challenges
                 </CardTitle>
-                                 <CardDescription>
-                   Select any problem to start a 1v1 battle
-                 </CardDescription>
+                <CardDescription className="text-xs sm:text-sm font-body">
+                  Select any problem to start a 1v1 battle
+                </CardDescription>
               </CardHeader>
               <CardContent>
-                                 <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
-                   {[...PROBLEMS, TWO_SUM_PROBLEM].map((problem) => (
-                    <Card key={problem.id} className="hover:shadow-md transition-shadow">
-                      <CardContent className="p-4">
+                <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
+                  {[...PROBLEMS, TWO_SUM_PROBLEM].map((problem) => (
+                    <Card key={problem.id} className="card-hover border-border/50 bg-card/30 backdrop-blur-sm hover:bg-card/50 transition-all">
+                      <CardContent className="p-3 sm:p-4">
                         <div className="flex items-start justify-between mb-2">
-                          <h3 className="font-semibold text-sm">{problem.name}</h3>
+                          <h3 className="font-semibold text-xs sm:text-sm font-heading">{problem.name}</h3>
                           <Badge 
                             variant={
                               problem.difficulty === 'Easy' ? 'default' :
@@ -215,12 +214,12 @@ export default function ArenaPage() {
                             {problem.difficulty}
                           </Badge>
                         </div>
-                        <p className="text-xs text-muted-foreground mb-3 line-clamp-2">
+                        <p className="text-xs text-muted-foreground mb-3 line-clamp-2 font-body">
                           {problem.description}
                         </p>
                         <Button 
                           size="sm" 
-                          className="w-full"
+                          className="w-full text-xs h-8 hover:scale-[1.02] transition-transform"
                           onClick={() => handlePlay1v1(problem.id)}
                           disabled={isSearching || !!activeMatch}
                         >
@@ -235,83 +234,83 @@ export default function ArenaPage() {
           </div>
 
           {/* Match History & Stats */}
-          <div className="space-y-6">
+          <div className="space-y-4 sm:space-y-5">
             {/* Quick Stats */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Trophy className="h-5 w-5" />
+            <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Trophy className="h-4 w-4 text-yellow-500" />
                   Your Stats
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3">
-                  <div className="flex justify-between">
-                    <span className="text-sm text-muted-foreground">Total Matches</span>
-                    <span className="font-semibold">{userMatches?.length || 0}</span>
+                <div className="space-y-2.5">
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs sm:text-sm text-muted-foreground font-body">Total Matches</span>
+                    <span className="font-medium font-heading text-sm">{userMatches?.length || 0}</span>
                   </div>
-                                     <div className="flex justify-between">
-                     <span className="text-sm text-muted-foreground">Wins</span>
-                     <span className="font-semibold text-green-600">
-                       {userMatches?.filter(m => m.winnerId === userId).length || 0}
-                     </span>
-                   </div>
-                   <div className="flex justify-between">
-                     <span className="text-sm text-muted-foreground">Forfeits</span>
-                     <span className="font-semibold text-red-600">
-                       {userMatches?.filter(m => m.status === 'forfeited' && m.winnerId !== userId).length || 0}
-                     </span>
-                   </div>
-                   <div className="flex justify-between">
-                     <span className="text-sm text-muted-foreground">Win Rate</span>
-                     <span className="font-semibold">
-                       {userMatches && userMatches.length > 0 
-                         ? Math.round((userMatches.filter(m => m.winnerId === userId).length / userMatches.length) * 100)
-                         : 0}%
-                     </span>
-                   </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs sm:text-sm text-muted-foreground font-body">Wins</span>
+                    <span className="font-medium font-heading text-sm text-green-500">
+                      {userMatches?.filter(m => m.winnerId === userId).length || 0}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs sm:text-sm text-muted-foreground font-body">Forfeits</span>
+                    <span className="font-medium font-heading text-sm text-red-500">
+                      {userMatches?.filter(m => m.status === 'forfeited' && m.winnerId !== userId).length || 0}
+                    </span>
+                  </div>
+                  <div className="flex justify-between items-center">
+                    <span className="text-xs sm:text-sm text-muted-foreground font-body">Win Rate</span>
+                    <span className="font-medium font-heading text-sm">
+                      {userMatches && userMatches.length > 0 
+                        ? Math.round((userMatches.filter(m => m.winnerId === userId).length / userMatches.length) * 100)
+                        : 0}%
+                    </span>
+                  </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Recent Matches */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Clock className="h-5 w-5" />
+            <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Clock className="h-4 w-4 text-blue-500" />
                   Recent Matches
                 </CardTitle>
               </CardHeader>
               <CardContent>
                 {userMatches && userMatches.length > 0 ? (
-                  <div className="space-y-3">
+                  <div className="space-y-2">
                     {userMatches.slice(0, 5).map((match) => (
-                      <div key={match._id} className="flex items-center justify-between p-2 rounded border">
-                        <div className="flex-1">
-                          <p className="text-sm font-medium">
+                      <div key={match._id} className="flex items-center justify-between p-2.5 rounded-md bg-muted/30 hover:bg-muted/50 transition-colors border border-border/30">
+                        <div className="flex-1 min-w-0">
+                          <p className="text-xs sm:text-sm font-medium font-body truncate">
                             {PROBLEMS.find(p => p.id === match.problemId)?.name || match.problemId}
                           </p>
-                          <p className="text-xs text-muted-foreground">
+                          <p className="text-xs text-muted-foreground font-body">
                             {new Date(match.createdAt).toLocaleDateString()}
                           </p>
                         </div>
-                                                 <Badge 
-                           variant={
-                             match.winnerId === userId ? 'default' :
-                             match.status === 'completed' ? 'secondary' :
-                             match.status === 'forfeited' ? 'destructive' : 'outline'
-                           }
-                           className="text-xs"
-                         >
-                           {match.winnerId === userId ? 'Won' :
-                            match.status === 'completed' ? 'Lost' :
-                            match.status === 'forfeited' ? 'Forfeit' : match.status}
-                         </Badge>
+                        <Badge 
+                          variant={
+                            match.winnerId === userId ? 'default' :
+                            match.status === 'completed' ? 'secondary' :
+                            match.status === 'forfeited' ? 'destructive' : 'outline'
+                          }
+                          className="text-xs ml-2 flex-shrink-0"
+                        >
+                          {match.winnerId === userId ? 'Won' :
+                           match.status === 'completed' ? 'Lost' :
+                           match.status === 'forfeited' ? 'Forfeit' : match.status}
+                        </Badge>
                       </div>
                     ))}
                   </div>
                 ) : (
-                  <p className="text-sm text-muted-foreground text-center py-4">
+                  <p className="text-xs sm:text-sm text-muted-foreground text-center py-4 font-body">
                     No matches yet. Start your first battle!
                   </p>
                 )}
@@ -319,45 +318,45 @@ export default function ArenaPage() {
             </Card>
 
             {/* How to Play */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Users className="h-5 w-5" />
+            <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Users className="h-4 w-4 text-purple-500" />
                   How to Play
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <div className="space-y-3 text-sm">
+                <div className="space-y-2.5 text-xs sm:text-sm font-body">
                   <div className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <p>Select a problem to start matchmaking</p>
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-muted-foreground">Select a problem to start matchmaking</p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <p>Wait for an opponent to join</p>
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-muted-foreground">Wait for an opponent to join</p>
                   </div>
                   <div className="flex items-start gap-2">
-                    <div className="w-2 h-2 bg-primary rounded-full mt-2 flex-shrink-0"></div>
-                    <p>First correct submission wins!</p>
+                    <div className="w-1.5 h-1.5 bg-primary rounded-full mt-2 flex-shrink-0"></div>
+                    <p className="text-muted-foreground">First correct submission wins!</p>
                   </div>
                 </div>
               </CardContent>
             </Card>
 
             {/* Leaderboard Link */}
-            <Card>
-              <CardHeader>
-                <CardTitle className="flex items-center gap-2">
-                  <Crown className="h-5 w-5" />
+            <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="pb-3">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Crown className="h-4 w-4 text-yellow-500" />
                   Leaderboard
                 </CardTitle>
               </CardHeader>
               <CardContent>
-                <p className="text-sm text-muted-foreground mb-3">
+                <p className="text-xs sm:text-sm text-muted-foreground mb-3 font-body">
                   See how you rank against other players!
                 </p>
                 <Link href="/leaderboard">
-                  <Button size="sm" className="w-full">
+                  <Button size="sm" className="w-full text-xs h-8 hover:scale-[1.02] transition-transform">
                     View Leaderboard
                   </Button>
                 </Link>
@@ -366,6 +365,8 @@ export default function ArenaPage() {
           </div>
         </div>
       </div>
+      <br />
+      <br />
     </div>
   )
 }

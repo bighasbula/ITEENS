@@ -1,11 +1,15 @@
 import type { Metadata } from 'next'
-import { Geist, Geist_Mono } from 'next/font/google'
+import { Geist, Geist_Mono, Inter, Space_Grotesk } from 'next/font/google'
 import './globals.css'
 import { ClerkProvider } from '@clerk/nextjs'
 import ConvexClientProvider from '@/components/ConvexClientProvider'
 import Navigation from '@/components/Navigation'
 import { Analytics } from "@vercel/analytics/react"
 import Footer from '@/components/Footer'
+
+
+import ConditionalFooter from '@/components/ConditionalFooter';
+
 
 const geistSans = Geist({
   variable: '--font-geist-sans',
@@ -15,6 +19,18 @@ const geistSans = Geist({
 const geistMono = Geist_Mono({
   variable: '--font-geist-mono',
   subsets: ['latin'],
+})
+
+const inter = Inter({
+  variable: '--font-inter',
+  subsets: ['latin'],
+  display: 'swap',
+})
+
+const spaceGrotesk = Space_Grotesk({
+  variable: '--font-space-grotesk',
+  subsets: ['latin'],
+  display: 'swap',
 })
 
 export const metadata: Metadata = {
@@ -29,7 +45,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="en">
-      <body className={`${geistSans.variable} ${geistMono.variable} antialiased`}>
+      <body className={`${geistSans.variable} ${geistMono.variable} ${inter.variable} ${spaceGrotesk.variable} antialiased`}>
         <ClerkProvider>
           <ConvexClientProvider>
             <Navigation />
@@ -37,7 +53,7 @@ export default function RootLayout({
           </ConvexClientProvider>
         </ClerkProvider>
         <Analytics />
-        <Footer />
+        <ConditionalFooter />
       </body>
     </html>
   )
