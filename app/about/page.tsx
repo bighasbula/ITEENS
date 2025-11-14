@@ -54,27 +54,24 @@ export default function AboutPage() {
             What is ITEENS
           </h1>
           
-          <div className="max-w-4xl mx-auto">
-            <Card className="bg-white/10 backdrop-blur-md border-white/20 card-hover">
+          <div className="max-w-3xl mx-auto flex justify-center">
+            <Card className="bg-white/10 backdrop-blur-md border-white/20 card-hover rounded-2xl">
               <CardContent className="p-4 sm:p-5 md:p-6">
-                <p className="text-white text-sm sm:text-base leading-relaxed font-body mb-3 sm:mb-4">
-                  ITEENS is a group of ambitious people who united together to create a new world. 
-                  We focus on empowering teens in tech, providing opportunities, knowledge, and hosting 
-                  events like hackathons and social meet-ups. Our mission is to inspire the next 
-                  generation of innovators and creators.
+                <p className="text-white text-sm sm:text-base leading-relaxed font-body mb-4 text-center">
+                  We empower teens in tech by providing opportunities, knowledge, and events like hackathons and social meet-ups. Our mission is to inspire the next generation of innovators and creators.
                 </p>
-                <p className="text-white text-sm sm:text-base leading-relaxed font-body">
-                  We believe that every teenager has the potential to change the world through technology. 
-                  That&apos;s why we create platforms like this competitive coding arena, where young minds 
-                  can learn, practice, and grow together. Follow us on social platforms and get in touch 
-                  to join our community of tech enthusiasts!
+                <p className="text-white text-sm sm:text-base leading-relaxed font-body text-center">
+                  Every teenager has the potential to change the world through technology. That&apos;s why we created this competitive coding arena—where young minds can learn, practice, and grow together. Follow us on social platforms and get in touch to join our community of tech enthusiasts!
                 </p>
               </CardContent>
             </Card>
           </div>
+
         </section>
 
         {/* Meet our team Section */}
+        <br />
+        <br />
         <section className="mb-8 sm:mb-10">
           <h2 className="text-2xl sm:text-3xl md:text-4xl font-heading text-white text-center mb-5 sm:mb-6">
             Meet our team
@@ -120,6 +117,8 @@ export default function AboutPage() {
         </section>
 
         {/* Contact Section */}
+        <br />
+        <br />
         <section className="mt-8 sm:mt-10 text-center">
           <Card className="bg-white/10 backdrop-blur-md border-white/20 max-w-2xl mx-auto card-hover">
             <CardContent className="p-4 sm:p-5">

@@ -797,7 +797,7 @@ print(result)`,
 export const TWO_SUM_PROBLEM: Problem = {
   id: "two-sum",
   name: "Two Sum",
-  difficulty: "Hard",
+  difficulty: "Medium",
   description: "Given an array of integers nums and an integer target, return indices of the two numbers such that they add up to target. You may assume that each input would have exactly one solution, and you may not use the same element twice.",
   sampleInput: "[2, 7, 11, 15]\n9",
   sampleOutput: "[0, 1]",
@@ -857,7 +857,7 @@ export const TWO_SUM_PROBLEM: Problem = {
 
 def twoSum(nums, target):
     # Your code here
-    pass
+    
 
 # Read input
 input_line = input()
