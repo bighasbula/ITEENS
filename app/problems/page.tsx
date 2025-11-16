@@ -56,44 +56,34 @@ export default function ProblemsPage() {
   };
 
   return (
-    <div className="min-h-screen bg-background pt-24 sm:pt-28">
-      <div className="container mx-auto px-4 sm:px-6 py-6 sm:py-8">
+    <div className="min-h-screen bg-background pt-20 sm:pt-24">
+      <div className="container mx-auto px-4 sm:px-6 py-5 sm:py-6 max-w-7xl">
         {/* Header */}
-        <div className="text-center mb-6 sm:mb-8">
-          <div className="flex items-center justify-center gap-2 mb-3 sm:mb-4">
-            <Target className="h-8 w-8 sm:h-12 sm:w-12 text-primary" />
-            <br />
-            <br />
-            <br />
-            <h1 className="text-2xl sm:text-3xl md:text-4xl font-bold text-foreground">Practice Problems</h1>
+        <div className="text-center mb-5 sm:mb-6">
+          <div className="flex items-center justify-center gap-2 mb-2 sm:mb-3">
+            <Target className="h-6 w-6 sm:h-7 sm:w-7 text-primary" />
+            <h1 className="text-xl sm:text-2xl md:text-3xl font-heading text-foreground">Practice Problems</h1>
           </div>
-          <br />
-          <p className="text-lg sm:text-xl text-muted-foreground">Choose a problem to solve and improve your coding skills</p>
+          <p className="text-sm sm:text-base text-muted-foreground font-body">Choose a problem to solve and improve your coding skills</p>
         </div>
 
-        <br />
-        <br />
-
         {/* Filters */}
-        <div className="bg-card rounded-lg shadow-md p-4 sm:p-6 mb-6 sm:mb-8 border border-border">
-          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-3 sm:gap-4">
-
+        <div className="bg-card/50 backdrop-blur-sm rounded-md shadow-sm p-3 sm:p-4 mb-4 sm:mb-5 border border-border/50">
+          <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-2 sm:gap-3">
             {/* Search */}
             <div className="relative">
-              <Search className="absolute left-3 top-1/2 transform -translate-y-1/2 text-white h-4 w-4" />
+              <Search className="absolute left-2.5 top-1/2 transform -translate-y-1/2 text-muted-foreground h-3.5 w-3.5" />
               <Input
                 placeholder="Search problems..."
                 value={searchTerm}
                 onChange={(e) => setSearchTerm(e.target.value)}
-                className="pl-10 bg-transparent text-white placeholder-white border-white focus:border-white focus:ring-white"
+                className="pl-8 h-8 text-xs sm:text-sm bg-background/50 border-border/50 focus:border-border font-body"
               />
             </div>
 
-
             {/* Difficulty Filter */}
             <Select value={difficultyFilter} onValueChange={setDifficultyFilter}>
-              <SelectTrigger className="text-white border-white bg-transparent focus:border-white focus:ring-white"
-              >
+              <SelectTrigger className="h-8 text-xs sm:text-sm border-border/50 bg-background/50 focus:border-border font-body">
                 <SelectValue placeholder="Difficulty" />
               </SelectTrigger>
               <SelectContent>
@@ -106,8 +96,7 @@ export default function ProblemsPage() {
 
             {/* Tag Filter */}
             <Select value={tagFilter} onValueChange={setTagFilter}>
-              <SelectTrigger className="text-white border-white bg-transparent focus:border-white focus:ring-white"
-              >
+              <SelectTrigger className="h-8 text-xs sm:text-sm border-border/50 bg-background/50 focus:border-border font-body">
                 <SelectValue placeholder="Tags" />
               </SelectTrigger>
               <SelectContent>
@@ -126,6 +115,7 @@ export default function ProblemsPage() {
                 setDifficultyFilter('all');
                 setTagFilter('all');
               }}
+              className="h-8 text-xs sm:text-sm border-border/50 hover:scale-[1.02] transition-transform font-body"
             >
               Clear Filters
             </Button>
@@ -133,42 +123,42 @@ export default function ProblemsPage() {
         </div>
 
         {/* Problems Grid */}
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-6">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-3 sm:gap-4">
           {filteredProblems.map((problem) => (
-            <Card key={problem.id} className="card-hover">
-              <CardHeader className="p-4 sm:p-6">
+            <Card key={problem.id} className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+              <CardHeader className="p-3 sm:p-4 pb-2">
                 <div className="flex items-start justify-between">
                   <div className="flex-1">
-                    <CardTitle className="text-base sm:text-lg mb-2">{problem.name}</CardTitle>
-                    <Badge className={getDifficultyColor(problem.difficulty)}>
+                    <CardTitle className="text-sm sm:text-base mb-2 font-heading">{problem.name}</CardTitle>
+                    <Badge className={`text-xs ${getDifficultyColor(problem.difficulty)}`}>
                       {problem.difficulty}
                     </Badge>
                   </div>
                 </div>
               </CardHeader>
-              <CardContent className="p-4 sm:p-6">
-                <p className="text-muted-foreground text-sm mb-3 sm:mb-4 line-clamp-3">
+              <CardContent className="p-3 sm:p-4 pt-2">
+                <p className="text-muted-foreground text-xs sm:text-sm mb-3 line-clamp-2 font-body">
                   {problem.description}
                 </p>
                 
                 {/* Tags */}
-                <div className="flex flex-wrap gap-1 mb-3 sm:mb-4">
+                <div className="flex flex-wrap gap-1 mb-3">
                   {problem.tags.slice(0, 3).map((tag) => (
-                    <Badge key={tag} variant="outline" className="text-xs">
+                    <Badge key={tag} variant="outline" className="text-xs border-border/50 font-body">
                       {tag}
                     </Badge>
                   ))}
                   {problem.tags.length > 3 && (
-                    <Badge variant="outline" className="text-xs">
+                    <Badge variant="outline" className="text-xs border-border/50 font-body">
                       +{problem.tags.length - 3} more
                     </Badge>
                   )}
                 </div>
 
                 {/* Sample Input/Output */}
-                <div className="bg-muted p-2 sm:p-3 rounded text-xs mb-3 sm:mb-4">
-                  <div className="font-semibold mb-1 text-card-foreground">Sample:</div>
-                  <div className="text-muted-foreground">
+                <div className="bg-muted/30 p-2 rounded-md text-xs mb-3 font-body">
+                  <div className="font-medium mb-1 text-foreground font-heading">Sample:</div>
+                  <div className="text-muted-foreground space-y-0.5">
                     <div>Input: {problem.sampleInput}</div>
                     <div>Output: {problem.sampleOutput}</div>
                   </div>
@@ -176,8 +166,8 @@ export default function ProblemsPage() {
 
                 {/* Action Button */}
                 <Link href={`/problem?id=${problem.id}`}>
-                  <Button className="w-full" size="sm">
-                    <Play className="h-4 w-4 mr-2" />
+                  <Button className="w-full text-xs h-8 hover:scale-[1.02] transition-transform" size="sm">
+                    <Play className="h-3.5 w-3.5 mr-1.5" />
                     Start Solving
                   </Button>
                 </Link>
@@ -188,33 +178,35 @@ export default function ProblemsPage() {
 
         {/* No Results */}
         {filteredProblems.length === 0 && (
-          <div className="text-center py-8 sm:py-12">
-            <Target className="h-12 w-12 sm:h-16 sm:w-16 text-muted-foreground mx-auto mb-3 sm:mb-4" />
-            <h3 className="text-base sm:text-lg font-semibold text-muted-foreground mb-2">No problems found</h3>
-            <p className="text-muted-foreground text-sm sm:text-base">Try adjusting your search or filters</p>
+          <div className="text-center py-6 sm:py-8">
+            <Target className="h-8 w-8 sm:h-10 sm:w-10 text-muted-foreground/30 mx-auto mb-2 sm:mb-3" />
+            <h3 className="text-sm sm:text-base font-medium font-heading text-muted-foreground mb-1">No problems found</h3>
+            <p className="text-muted-foreground text-xs sm:text-sm font-body">Try adjusting your search or filters</p>
           </div>
         )}
 
         {/* Stats */}
-        <div className="mt-8 sm:mt-12 text-center">
-          <div className="grid grid-cols-1 sm:grid-cols-3 gap-4 sm:gap-6">
-            <div className="bg-card rounded-lg p-4 sm:p-6 shadow-md border border-border">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">{allProblems.length}</div>
-              <div className="text-muted-foreground text-sm sm:text-base">Total Problems</div>
+        <div className="mt-6 sm:mt-8 text-center">
+          <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4">
+            <div className="bg-card/50 backdrop-blur-sm rounded-md p-3 sm:p-4 shadow-sm border border-border/50 card-hover">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">{allProblems.length}</div>
+              <div className="text-muted-foreground text-xs sm:text-sm font-body">Total Problems</div>
             </div>
-            <div className="bg-card rounded-lg p-4 sm:p-6 shadow-md border border-border">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">
+            <div className="bg-card/50 backdrop-blur-sm rounded-md p-3 sm:p-4 shadow-sm border border-border/50 card-hover">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">
                 {allProblems.filter(p => p.difficulty === 'Easy').length}
               </div>
-              <div className="text-muted-foreground text-sm sm:text-base">Beginner Friendly</div>
+              <div className="text-muted-foreground text-xs sm:text-sm font-body">Beginner Friendly</div>
             </div>
-            <div className="bg-card rounded-lg p-4 sm:p-6 shadow-md border border-border">
-              <div className="text-2xl sm:text-3xl font-bold text-primary mb-2">{allTags.length}</div>
-              <div className="text-muted-foreground text-sm sm:text-base">Topics Covered</div>
+            <div className="bg-card/50 backdrop-blur-sm rounded-md p-3 sm:p-4 shadow-sm border border-border/50 card-hover">
+              <div className="text-xl sm:text-2xl font-heading text-primary mb-1">{allTags.length}</div>
+              <div className="text-muted-foreground text-xs sm:text-sm font-body">Topics Covered</div>
             </div>
           </div>
         </div>
       </div>
+      <br />
+      <br />
     </div>
   );
 }

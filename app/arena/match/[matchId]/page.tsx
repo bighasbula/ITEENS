@@ -186,38 +186,38 @@ export default function MatchPage() {
   }
 
   return (
-    <div className="min-h-screen bg-background">
+    <div className="min-h-screen bg-background pt-20 sm:pt-24">
       {/* Anti-cheat Warning */}
       {!isPageVisible && (
         <div className="fixed top-0 left-0 right-0 bg-destructive text-destructive-foreground p-2 text-center z-50">
           <div className="flex items-center justify-center gap-2">
-            <AlertTriangle className="h-4 w-4" />
-            <span className="text-sm font-medium">
+            <AlertTriangle className="h-3.5 w-3.5" />
+            <span className="text-xs sm:text-sm font-medium font-body">
               WARNING: You switched tabs! This may result in a forfeit.
             </span>
           </div>
         </div>
       )}
 
-      <div className="container mx-auto px-4 py-6">
+      <div className="container mx-auto px-4 sm:px-6 py-4 sm:py-5 max-w-7xl">
         {/* Match Header */}
-        <div className="flex items-center justify-between mb-6">
+        <div className="flex items-center justify-between mb-4 sm:mb-5">
           <div>
-            <h1 className="text-2xl font-bold text-foreground">
+            <h1 className="text-lg sm:text-xl md:text-2xl font-heading text-foreground">
               {problem?.name} - 1v1 Battle
             </h1>
-            <p className="text-muted-foreground">
+            <p className="text-xs sm:text-sm text-muted-foreground font-body mt-1">
               {isPlayer1 ? 'You vs ' + (player2?.username || 'Opponent') : (player1?.username || 'Opponent') + ' vs You'}
             </p>
           </div>
           
-          <div className="flex items-center gap-4">
-            <div className="flex items-center gap-2">
-              <Clock className="h-4 w-4" />
-              <span className="font-mono">{Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}</span>
+          <div className="flex items-center gap-2 sm:gap-3">
+            <div className="flex items-center gap-1.5">
+              <Clock className="h-3.5 w-3.5 text-muted-foreground" />
+              <span className="font-mono text-sm sm:text-base font-heading">{Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}</span>
             </div>
             
-            <Badge variant={match.status === 'in-progress' ? 'default' : 'secondary'}>
+            <Badge variant={match.status === 'in-progress' ? 'default' : 'secondary'} className="text-xs font-body">
               {match.status === 'in-progress' ? 'In Progress' : match.status}
             </Badge>
           </div>
@@ -226,13 +226,13 @@ export default function MatchPage() {
         {/* Match Status Overlay */}
         {match.status === 'waiting' && (
           <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
-            <Card className="w-full max-w-md">
-              <CardHeader className="text-center">
-                <div className="flex justify-center mb-4">
-                  <Loader2 className="h-8 w-8 animate-spin text-primary" />
+            <Card className="w-full max-w-md card-hover border-border/50 bg-card/90 backdrop-blur-md">
+              <CardHeader className="text-center pb-3">
+                <div className="flex justify-center mb-3">
+                  <Loader2 className="h-6 w-6 animate-spin text-primary" />
                 </div>
-                <CardTitle>Waiting for Opponent</CardTitle>
-                <CardDescription>
+                <CardTitle className="text-base font-heading">Waiting for Opponent</CardTitle>
+                <CardDescription className="text-xs sm:text-sm font-body">
                   Share this link with a friend to start the battle!
                 </CardDescription>
               </CardHeader>
@@ -240,6 +240,7 @@ export default function MatchPage() {
                 <Button 
                   variant="outline" 
                   onClick={handleLeaveMatch}
+                  className="text-xs sm:text-sm h-8 hover:scale-[1.02] transition-transform border-border/50 font-body"
                 >
                   Cancel Match
                 </Button>
@@ -248,178 +249,178 @@ export default function MatchPage() {
           </div>
         )}
 
-                 {/* Winner Announcement */}
-         {(match.status === 'completed' || match.status === 'forfeited') && match.winnerId && (
-           <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
-             <Card className="w-full max-w-md">
-               <CardHeader className="text-center">
-                 <div className="flex justify-center mb-4">
-                   {match.status === 'completed' ? (
-                     <Trophy className="h-12 w-12 text-yellow-500" />
-                   ) : (
-                     <div className="h-12 w-12 bg-red-100 rounded-full flex items-center justify-center">
-                       <AlertTriangle className="h-6 w-6 text-red-600" />
-                     </div>
-                   )}
-                 </div>
-                 <CardTitle>
-                   {match.winnerId === userId ? 'You Won! 🎉' : 'You Lost 😔'}
-                 </CardTitle>
-                 <CardDescription>
-                   {match.status === 'completed' ? (
-                     match.winnerId === userId 
-                       ? 'Congratulations! You solved it first!'
-                       : 'Better luck next time!'
-                   ) : (
-                     match.winnerId === userId 
-                       ? `Your opponent ${match.forfeitReason === 'left_page' ? 'left the match' : 'switched tabs'}`
-                       : `You ${match.forfeitReason === 'left_page' ? 'left the match' : 'switched tabs'}`
-                   )}
-                 </CardDescription>
-               </CardHeader>
-               <CardContent className="text-center space-y-4">
-                 <div className="text-sm text-muted-foreground">
-                   Time: {Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}
-                 </div>
-                 <Button onClick={() => router.push('/arena')}>
-                   Back to Arena
-                 </Button>
-               </CardContent>
-             </Card>
-           </div>
-         )}
+        {/* Winner Announcement */}
+        {(match.status === 'completed' || match.status === 'forfeited') && match.winnerId && (
+          <div className="fixed inset-0 bg-background/80 backdrop-blur-sm z-50 flex items-center justify-center">
+            <Card className="w-full max-w-md card-hover border-border/50 bg-card/90 backdrop-blur-md">
+              <CardHeader className="text-center pb-3">
+                <div className="flex justify-center mb-3">
+                  {match.status === 'completed' ? (
+                    <Trophy className="h-10 w-10 sm:h-12 sm:w-12 text-yellow-500" />
+                  ) : (
+                    <div className="h-10 w-10 sm:h-12 sm:w-12 bg-red-100 rounded-full flex items-center justify-center">
+                      <AlertTriangle className="h-5 w-5 sm:h-6 sm:w-6 text-red-600" />
+                    </div>
+                  )}
+                </div>
+                <CardTitle className="text-base sm:text-lg font-heading">
+                  {match.winnerId === userId ? 'You Won! 🎉' : 'You Lost 😔'}
+                </CardTitle>
+                <CardDescription className="text-xs sm:text-sm font-body">
+                  {match.status === 'completed' ? (
+                    match.winnerId === userId 
+                      ? 'Congratulations! You solved it first!'
+                      : 'Better luck next time!'
+                  ) : (
+                    match.winnerId === userId 
+                      ? `Your opponent ${match.forfeitReason === 'left_page' ? 'left the match' : 'switched tabs'}`
+                      : `You ${match.forfeitReason === 'left_page' ? 'left the match' : 'switched tabs'}`
+                  )}
+                </CardDescription>
+              </CardHeader>
+              <CardContent className="text-center space-y-3">
+                <div className="text-xs sm:text-sm text-muted-foreground font-body">
+                  Time: {Math.floor(timeElapsed / 60)}:{(timeElapsed % 60).toString().padStart(2, '0')}
+                </div>
+                <Button onClick={() => router.push('/arena')} className="text-xs sm:text-sm h-8 hover:scale-[1.02] transition-transform font-body">
+                  Back to Arena
+                </Button>
+              </CardContent>
+            </Card>
+          </div>
+        )}
 
-                 {/* Main Content */}
-         {match.status === 'in-progress' && problem && (
-           <div className="grid grid-cols-1 lg:grid-cols-2 gap-6">
-             {/* Problem Description */}
-             <div className="space-y-4">
-               <Card>
-                 <CardHeader>
-                   <CardTitle>{problem.name}</CardTitle>
-                   <CardDescription>
-                     {problem.difficulty} • {problem.tags.join(', ')}
-                   </CardDescription>
-                 </CardHeader>
-                 <CardContent>
-                   <div className="space-y-4">
-                     <div>
-                       <h3 className="font-semibold mb-2">Description</h3>
-                       <p className="text-sm text-muted-foreground">
-                         {problem.description}
-                       </p>
-                     </div>
-                     
-                     <div>
-                       <h3 className="font-semibold mb-2">Sample Input</h3>
-                       <pre className="bg-muted p-2 rounded text-sm">
-                         {problem.sampleInput}
-                       </pre>
-                     </div>
-                     
-                     <div>
-                       <h3 className="font-semibold mb-2">Sample Output</h3>
-                       <pre className="bg-muted p-2 rounded text-sm">
-                         {problem.sampleOutput}
-                       </pre>
-                     </div>
-                   </div>
-                 </CardContent>
-               </Card>
-             </div>
+        {/* Main Content */}
+        {match.status === 'in-progress' && problem && (
+          <div className="grid grid-cols-1 lg:grid-cols-2 gap-4 sm:gap-5">
+            {/* Problem Description */}
+            <div className="space-y-3 sm:space-y-4">
+              <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+                <CardHeader className="pb-3">
+                  <CardTitle className="text-sm sm:text-base font-heading">{problem.name}</CardTitle>
+                  <CardDescription className="text-xs sm:text-sm font-body">
+                    {problem.difficulty} • {problem.tags.join(', ')}
+                  </CardDescription>
+                </CardHeader>
+                <CardContent>
+                  <div className="space-y-3 sm:space-y-4">
+                    <div>
+                      <h3 className="font-medium text-xs sm:text-sm mb-1.5 font-heading">Description</h3>
+                      <p className="text-xs sm:text-sm text-muted-foreground font-body">
+                        {problem.description}
+                      </p>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-xs sm:text-sm mb-1.5 font-heading">Sample Input</h3>
+                      <pre className="bg-muted/30 p-2 rounded-md text-xs sm:text-sm font-mono">
+                        {problem.sampleInput}
+                      </pre>
+                    </div>
+                    
+                    <div>
+                      <h3 className="font-medium text-xs sm:text-sm mb-1.5 font-heading">Sample Output</h3>
+                      <pre className="bg-muted/30 p-2 rounded-md text-xs sm:text-sm font-mono">
+                        {problem.sampleOutput}
+                      </pre>
+                    </div>
+                  </div>
+                </CardContent>
+              </Card>
+            </div>
 
-             {/* Code Editor */}
-             <div className="space-y-4">
-               <div className="flex items-center justify-between">
-                 <h2 className="text-lg font-semibold">Your Code</h2>
-                 <div className="flex items-center gap-2">
-                   <select
-                     value={selectedLanguage}
-                     onChange={(e) => {
-                       const newLanguage = e.target.value as SupportedLanguage;
-                       setSelectedLanguage(newLanguage);
-                       // Update code immediately when language changes
-                       if (problem) {
-                         setCode(problem.defaultCode[newLanguage]);
-                       }
-                     }}
-                     className="px-3 py-1 border rounded text-sm"
-                   >
-                     <option value="python">Python</option>
-                     <option value="javascript">JavaScript</option>
-                     <option value="java">Java</option>
-                     <option value="cpp">C++</option>
-                   </select>
-                   <Button 
-                     onClick={handleSubmit} 
-                     disabled={isSubmitting}
-                     className="ml-2"
-                   >
-                     {isSubmitting ? (
-                       <>
-                         <Loader2 className="h-4 w-4 mr-2 animate-spin" />
-                         Submitting...
-                       </>
-                     ) : (
-                       'Submit'
-                     )}
-                   </Button>
-                 </div>
-               </div>
-               
-               <div className="border rounded-lg overflow-hidden" style={{ height: '400px' }}>
-                 <CodeEditor
-                   value={code}
-                   onChange={setCode}
-                   language={selectedLanguage}
-                   defaultCode={problem.defaultCode[selectedLanguage]}
-                 />
-               </div>
+            {/* Code Editor */}
+            <div className="space-y-3 sm:space-y-4">
+              <div className="flex items-center justify-between">
+                <h2 className="text-sm sm:text-base font-heading">Your Code</h2>
+                <div className="flex items-center gap-2">
+                  <select
+                    value={selectedLanguage}
+                    onChange={(e) => {
+                      const newLanguage = e.target.value as SupportedLanguage;
+                      setSelectedLanguage(newLanguage);
+                      // Update code immediately when language changes
+                      if (problem) {
+                        setCode(problem.defaultCode[newLanguage]);
+                      }
+                    }}
+                    className="px-2.5 py-1 border border-border/50 rounded-md text-xs sm:text-sm bg-background/50 font-body"
+                  >
+                    <option value="python">Python</option>
+                    <option value="javascript">JavaScript</option>
+                    <option value="java">Java</option>
+                    <option value="cpp">C++</option>
+                  </select>
+                  <Button 
+                    onClick={handleSubmit} 
+                    disabled={isSubmitting}
+                    className="h-8 text-xs sm:text-sm hover:scale-[1.02] transition-transform font-body"
+                  >
+                    {isSubmitting ? (
+                      <>
+                        <Loader2 className="h-3.5 w-3.5 mr-1.5 animate-spin" />
+                        Submitting...
+                      </>
+                    ) : (
+                      'Submit'
+                    )}
+                  </Button>
+                </div>
+              </div>
+              
+              <div className="border border-border/50 rounded-md overflow-hidden" style={{ height: '400px' }}>
+                <CodeEditor
+                  value={code}
+                  onChange={setCode}
+                  language={selectedLanguage}
+                  defaultCode={problem.defaultCode[selectedLanguage]}
+                />
+              </div>
 
-                               {/* Submission Result */}
-                {submissionResult && (
-                  <Card>
-                    <CardHeader>
-                      <CardTitle className="flex items-center gap-2">
-                        {submissionResult.status?.id === 3 && submissionResult.stdout?.trim() === problem.testCases[0].expectedOutput.trim() ? (
-                          <>
-                            <div className="w-3 h-3 bg-green-500 rounded-full"></div>
-                            Test Passed! ✅
-                          </>
-                        ) : (
-                          <>
-                            <div className="w-3 h-3 bg-red-500 rounded-full"></div>
-                            Test Failed ❌
-                          </>
-                        )}
-                      </CardTitle>
-                    </CardHeader>
-                    <CardContent>
-                      <div className="space-y-3">
-                        <div>
-                          <span className="font-semibold">Expected Output:</span>
-                          <pre className="bg-muted p-2 rounded text-sm mt-1">
-                            {problem.testCases[0].expectedOutput}
-                          </pre>
-                        </div>
-                        <div>
-                          <span className="font-semibold">Your Output:</span>
-                          <pre className="bg-muted p-2 rounded text-sm mt-1">
-                            {submissionResult.stdout || 'No output'}
-                          </pre>
-                        </div>
-                        {submissionResult.stderr && (
-                          <div>
-                            <span className="font-semibold text-red-600">Error:</span>
-                            <pre className="bg-red-50 p-2 rounded text-sm mt-1 text-red-700">
-                              {submissionResult.stderr}
-                            </pre>
-                          </div>
-                        )}
+              {/* Submission Result */}
+              {submissionResult && (
+                <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm">
+                  <CardHeader className="pb-3">
+                    <CardTitle className="flex items-center gap-2 text-sm sm:text-base font-heading">
+                      {submissionResult.status?.id === 3 && submissionResult.stdout?.trim() === problem.testCases[0].expectedOutput.trim() ? (
+                        <>
+                          <div className="w-2.5 h-2.5 bg-green-500 rounded-full"></div>
+                          Test Passed! ✅
+                        </>
+                      ) : (
+                        <>
+                          <div className="w-2.5 h-2.5 bg-red-500 rounded-full"></div>
+                          Test Failed ❌
+                        </>
+                      )}
+                    </CardTitle>
+                  </CardHeader>
+                  <CardContent>
+                    <div className="space-y-2.5">
+                      <div>
+                        <span className="font-medium text-xs sm:text-sm font-heading">Expected Output:</span>
+                        <pre className="bg-muted/30 p-2 rounded-md text-xs sm:text-sm mt-1 font-mono">
+                          {problem.testCases[0].expectedOutput}
+                        </pre>
                       </div>
-                    </CardContent>
-                  </Card>
-                )}
+                      <div>
+                        <span className="font-medium text-xs sm:text-sm font-heading">Your Output:</span>
+                        <pre className="bg-muted/30 p-2 rounded-md text-xs sm:text-sm mt-1 font-mono">
+                          {submissionResult.stdout || 'No output'}
+                        </pre>
+                      </div>
+                      {submissionResult.stderr && (
+                        <div>
+                          <span className="font-medium text-xs sm:text-sm text-red-600 font-heading">Error:</span>
+                          <pre className="bg-red-50 p-2 rounded-md text-xs sm:text-sm mt-1 text-red-700 font-mono">
+                            {submissionResult.stderr}
+                          </pre>
+                        </div>
+                      )}
+                    </div>
+                  </CardContent>
+                </Card>
+              )}
              </div>
            </div>
          )}

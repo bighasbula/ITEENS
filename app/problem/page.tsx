@@ -188,16 +188,16 @@ function ProblemPageContent() {
   return (
     <div className="h-[calc(100vh-3.5rem)] flex flex-col">
       {/* Problem Header */}
-      <div className="border-b border-border bg-secondary/95 backdrop-blur supports-[backdrop-filter]:bg-secondary/5 mt-22">
-        <div className="flex flex-col sm:flex-row h-auto sm:h-14 items-start sm:items-center px-3 sm:px-4 gap-2 sm:gap-4 py-2 sm:py-0">
+      <div className="border-b border-border/50 bg-card/50 backdrop-blur-sm supports-[backdrop-filter]:bg-card/50 mt-20 sm:mt-24">
+        <div className="flex flex-col sm:flex-row h-auto sm:h-12 items-start sm:items-center px-3 sm:px-4 gap-2 sm:gap-3 py-2 sm:py-0">
           <div className="flex items-center gap-2 w-full sm:w-auto">
-            <h1 className="text-base sm:text-lg font-semibold truncate">{problem.name}</h1>
-            <span className="px-2 py-1 text-xs bg-accent text-accent-foreground rounded-full flex-shrink-0">{problem.difficulty}</span>
+            <h1 className="text-sm sm:text-base font-heading truncate">{problem.name}</h1>
+            <span className="px-2 py-0.5 text-xs bg-accent text-accent-foreground rounded-md flex-shrink-0 font-body">{problem.difficulty}</span>
           </div>
-          <div className="flex items-center gap-2 sm:gap-4 w-full sm:w-auto">
-            <Separator orientation="vertical" className="h-6 hidden sm:block" />
+          <div className="flex items-center gap-2 sm:gap-3 w-full sm:w-auto">
+            <Separator orientation="vertical" className="h-5 hidden sm:block opacity-30" />
             <Select value={language} onValueChange={(value) => setLanguage(value as SupportedLanguage)}>
-              <SelectTrigger className="w-28 sm:w-32">
+              <SelectTrigger className="w-24 sm:w-28 h-8 text-xs sm:text-sm border-border/50 bg-background/50 font-body">
                 <SelectValue />
               </SelectTrigger>
               <SelectContent>
@@ -207,12 +207,13 @@ function ProblemPageContent() {
                 <SelectItem value="cpp">C++</SelectItem>
               </SelectContent>
             </Select>
-            <div className="flex gap-1 sm:gap-2 ml-auto">
+            <div className="flex gap-1.5 sm:gap-2 ml-auto">
               <Button 
                 variant="outline" 
                 onClick={handleRunCode}
                 disabled={isRunning}
                 size="sm"
+                className="h-8 text-xs sm:text-sm border-border/50 hover:scale-[1.02] transition-transform font-body"
               >
                 {isRunning ? 'Running...' : 'Run'}
               </Button>
@@ -220,6 +221,7 @@ function ProblemPageContent() {
                 onClick={handleSubmitCode}
                 disabled={isRunning}
                 size="sm"
+                className="h-8 text-xs sm:text-sm hover:scale-[1.02] transition-transform font-body"
               >
                 {isRunning ? 'Submitting...' : 'Submit'}
               </Button>

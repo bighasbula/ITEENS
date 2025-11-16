@@ -104,84 +104,84 @@ function SuccessPageContent() {
   const problem = getProblemById(successData.problemId);
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-6">
+    <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 pt-20 sm:pt-24 p-4 sm:p-6">
       <div className="max-w-6xl mx-auto">
         {/* Header */}
-        <div className="text-center mb-8">
-          <div className="flex items-center justify-center mb-4">
-            <CheckCircle className="h-12 w-12 text-green-600 mr-3" />
-            <h1 className="text-4xl font-bold text-gray-800">Congratulations!</h1>
+        <div className="text-center mb-5 sm:mb-6">
+          <div className="flex items-center justify-center mb-3 sm:mb-4">
+            <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-green-600 mr-2 sm:mr-3" />
+            <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading text-gray-800">Congratulations!</h1>
           </div>
-          <p className="text-xl text-gray-600">
+          <p className="text-sm sm:text-base text-gray-600 font-body">
             You&apos;ve successfully solved &quot;{problem?.name || successData.problemId}&quot;
           </p>
         </div>
 
         {/* Performance Stats */}
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-6 mb-8">
-          <Card className="bg-white shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center">
-                <Clock className="h-5 w-5 mr-2 text-blue-600" />
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-3 sm:gap-4 mb-5 sm:mb-6">
+          <Card className="bg-white shadow-sm border-border/50 card-hover">
+            <CardHeader className="text-center pb-3">
+              <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
+                <Clock className="h-4 w-4 mr-1.5 text-blue-600" />
                 Time Taken
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-3xl font-bold text-blue-600">
+              <p className="text-2xl sm:text-3xl font-heading text-blue-600">
                 {successData.timeTaken || 0}s
               </p>
-              <p className="text-sm text-gray-500 mt-1">Total time</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1 font-body">Total time</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-white shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center">
-                <Trophy className="h-5 w-5 mr-2 text-yellow-600" />
+          <Card className="bg-white shadow-sm border-border/50 card-hover">
+            <CardHeader className="text-center pb-3">
+              <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
+                <Trophy className="h-4 w-4 mr-1.5 text-yellow-600" />
                 Performance
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-3xl font-bold text-yellow-600">
+              <p className="text-2xl sm:text-3xl font-heading text-yellow-600">
                 {successData.executionTime}s
               </p>
-              <p className="text-sm text-gray-500 mt-1">Execution time</p>
-              <p className="text-sm text-gray-500">{successData.memory}KB memory</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1 font-body">Execution time</p>
+              <p className="text-xs sm:text-sm text-gray-500 font-body">{successData.memory}KB memory</p>
             </CardContent>
           </Card>
 
-          <Card className="bg-white shadow-lg">
-            <CardHeader className="text-center">
-              <CardTitle className="flex items-center justify-center">
-                <CheckCircle className="h-5 w-5 mr-2 text-green-600" />
+          <Card className="bg-white shadow-sm border-border/50 card-hover">
+            <CardHeader className="text-center pb-3">
+              <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
+                <CheckCircle className="h-4 w-4 mr-1.5 text-green-600" />
                 Test Cases
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
-              <p className="text-3xl font-bold text-green-600">
+              <p className="text-2xl sm:text-3xl font-heading text-green-600">
                 {successData.testCasesPassed}/{successData.totalTestCases}
               </p>
-              <p className="text-sm text-gray-500 mt-1">All tests passed</p>
+              <p className="text-xs sm:text-sm text-gray-500 mt-1 font-body">All tests passed</p>
             </CardContent>
           </Card>
         </div>
 
         {/* Problem Info */}
         {problem && (
-          <Card className="bg-white shadow-lg mb-8">
-            <CardHeader>
-              <CardTitle className="flex items-center gap-3">
+          <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
+            <CardHeader className="pb-3">
+              <CardTitle className="flex items-center gap-2 text-sm sm:text-base font-heading">
                 {problem.name}
-                <Badge className={getDifficultyColor(problem.difficulty)}>
+                <Badge className={`text-xs ${getDifficultyColor(problem.difficulty)} font-body`}>
                   {problem.difficulty}
                 </Badge>
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-gray-600 mb-4">{problem.description}</p>
-              <div className="flex flex-wrap gap-2">
+              <p className="text-xs sm:text-sm text-gray-600 mb-3 font-body">{problem.description}</p>
+              <div className="flex flex-wrap gap-1.5">
                 {problem.tags.map((tag, index) => (
-                  <Badge key={index} variant="outline" className="text-sm">
+                  <Badge key={index} variant="outline" className="text-xs border-border/50 font-body">
                     {tag}
                   </Badge>
                 ))}
@@ -191,51 +191,51 @@ function SuccessPageContent() {
         )}
 
         {/* Your Solution */}
-        <Card className="bg-white shadow-lg mb-8">
-          <CardHeader>
-            <CardTitle className="flex items-center justify-between">
+        <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
+          <CardHeader className="pb-3">
+            <CardTitle className="flex items-center justify-between text-sm sm:text-base font-heading">
               Your Solution
               <Button
                 variant="outline"
                 size="sm"
                 onClick={() => copyToClipboard(successData.code)}
-                className="flex items-center gap-2"
+                className="flex items-center gap-1.5 h-8 text-xs sm:text-sm border-border/50 hover:scale-[1.02] transition-transform font-body"
               >
-                <Copy className="h-4 w-4" />
+                <Copy className="h-3.5 w-3.5" />
                 Copy
               </Button>
             </CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
-              <pre className="text-sm">{successData.code}</pre>
+            <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
+              <pre className="text-xs sm:text-sm font-mono">{successData.code}</pre>
             </div>
           </CardContent>
         </Card>
 
         {/* Ideal Solution */}
-        <Card className="bg-white shadow-lg mb-8">
-          <CardHeader>
-            <CardTitle>Ideal Solution</CardTitle>
+        <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm sm:text-base font-heading">Ideal Solution</CardTitle>
           </CardHeader>
           <CardContent>
-            <div className="bg-gray-900 text-green-400 p-4 rounded-lg overflow-x-auto">
-              <pre className="text-sm">{idealSolution}</pre>
+            <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
+              <pre className="text-xs sm:text-sm font-mono">{idealSolution}</pre>
             </div>
           </CardContent>
         </Card>
 
         {/* Navigation */}
-        <div className="flex justify-center gap-4">
+        <div className="flex justify-center gap-2 sm:gap-3">
           <Link href="/problems">
-            <Button variant="outline" className="flex items-center gap-2">
-              <ArrowLeft className="h-4 w-4" />
+            <Button variant="outline" className="flex items-center gap-1.5 text-sm h-9 hover:scale-[1.02] transition-transform border-border/50 font-body">
+              <ArrowLeft className="h-3.5 w-3.5" />
               Back to Problems
             </Button>
           </Link>
           <Link href="/dashboard">
-            <Button className="flex items-center gap-2">
-              <Trophy className="h-4 w-4" />
+            <Button className="flex items-center gap-1.5 text-sm h-9 hover:scale-[1.02] transition-transform font-body">
+              <Trophy className="h-3.5 w-3.5" />
               View Dashboard
             </Button>
           </Link>
