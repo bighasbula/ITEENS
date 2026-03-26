@@ -229,7 +229,7 @@ function SuccessPageContent() {
               <p className="text-xs sm:text-sm text-gray-700 mb-3 font-body">{problem.description}</p>
               <div className="flex flex-wrap gap-1.5">
                 {problem.tags.map((tag, index) => (
-                  <Badge key={index} variant="outline" className="text-xs border-border/50 font-body">
+                  <Badge key={index} variant="outline" className="text-xs border-border/50 font-body text-gray-700">
                     {tag}
                   </Badge>
                 ))}
@@ -305,7 +305,7 @@ function SuccessPageContent() {
 
                 {aiResult.keyIssues && aiResult.keyIssues.length > 0 && (
                   <div>
-                    <p className="text-xs sm:text-sm font-heading mb-1">Key Issues</p>
+                    <p className="text-xs sm:text-sm font-heading mb-1"><div className="text-gray-700">Key Issues</div></p>
                     <div className="text-xs sm:text-sm text-gray-700 space-y-1">
                       {aiResult.keyIssues.map((k, i) => (
                         <div key={i}>• {k}</div>
