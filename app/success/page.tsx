@@ -306,7 +306,7 @@ function SuccessPageContent() {
                 {aiResult.keyIssues && aiResult.keyIssues.length > 0 && (
                   <div>
                     <p className="text-xs sm:text-sm font-heading mb-1"><div className="text-gray-700">Key Issues</div></p>
-                    <div className="text-xs sm:text-sm text-gray-700 space-y-1">
+                    <div className="text-xs sm:text-sm text-red-700 space-y-1">
                       {aiResult.keyIssues.map((k, i) => (
                         <div key={i}>• {k}</div>
                       ))}
@@ -316,14 +316,14 @@ function SuccessPageContent() {
 
                 {aiResult.recommendation && (
                   <div>
-                    <p className="text-xs sm:text-sm font-heading mb-1">Recommendation</p>
+                    <p className="text-xs sm:text-sm font-heading mb-1"><div className="text-gray-700">Recommendation</div></p>
                     <p className="text-xs sm:text-sm text-gray-700">{aiResult.recommendation}</p>
                   </div>
                 )}
 
                 {aiResult.improvedCode && (
                   <div>
-                    <p className="text-xs sm:text-sm font-heading mb-1">Better Way (Suggested Code)</p>
+                    <p className="text-xs sm:text-sm font-heading mb-1"><div className="text-green-700">Better Way (Suggested Code)</div></p>
                     <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
                       <pre className="text-xs sm:text-sm font-mono">{aiResult.improvedCode}</pre>
                     </div>
