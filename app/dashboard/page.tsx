@@ -1,5 +1,6 @@
 'use client';
 
+import { useState } from 'react';
 import { useUser } from '@/lib/hooks/useUser';
 import { useQuery } from 'convex/react';
 import { api } from '@/convex/_generated/api';
@@ -7,6 +8,7 @@ import { Button } from '@/components/ui/button';
 import { Card, CardContent, CardHeader, CardTitle } from '@/components/ui/card';
 import { Badge } from '@/components/ui/badge';
 import { Separator } from '@/components/ui/separator';
+import { Select, SelectContent, SelectItem, SelectTrigger, SelectValue } from '@/components/ui/select';
 import { 
   Trophy, 
   Clock, 
@@ -21,6 +23,26 @@ import {
 } from 'lucide-react';
 import Link from 'next/link';
 
+type ProgressCoachResponse = {
+  enabled: boolean
+  progressScore?: number
+  streakCoaching?: {
+    correlationHighlights?: string[]
+    habitFixes?: string[]
+  }
+  efficiencyAnalysis?: {
+    trend?: string
+    targetedPractice?: string[]
+  }
+  languageStrategy?: {
+    recommendedLanguageFocus?: string
+    why?: string
+    plan?: string[]
+  }
+  nextActions?: string[]
+  error?: string
+}
+
 export default function DashboardPage() {
   const { userId, isLoaded } = useUser();
   
@@ -28,6 +50,10 @@ export default function DashboardPage() {
   const submissionStats = useQuery(api.submissions.getUserSubmissionStats, userId ? { userId } : "skip");
   const recentSubmissions = useQuery(api.submissions.getUserSubmissions, userId ? { userId } : "skip");
   const arenaStats = useQuery(api.matches.getUserArenaStats, userId ? { userId } : "skip");
+
+  const [rangeDays, setRangeDays] = useState<7 | 30 | 90>(30)
+  const [aiLoading, setAiLoading] = useState(false)
+  const [aiResult, setAiResult] = useState<ProgressCoachResponse | null>(null)
 
   if (!isLoaded) {
     return (
@@ -52,6 +78,30 @@ export default function DashboardPage() {
         </div>
       </div>
     );
+  }
+
+  const analyzeProgress = async () => {
+    if (!userId) return
+
+    setAiLoading(true)
+    setAiResult(null)
+    try {
+      const res = await fetch('/api/ai/progress-coach', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ userId, rangeDays }),
+      })
+
+      const data = (await res.json()) as ProgressCoachResponse
+      setAiResult(data)
+    } catch (e) {
+      setAiResult({
+        enabled: true,
+        error: e instanceof Error ? e.message : 'Unknown error',
+      })
+    } finally {
+      setAiLoading(false)
+    }
   }
 
   return (
@@ -205,6 +255,143 @@ export default function DashboardPage() {
                   <span className="font-mono text-xs text-muted-foreground truncate max-w-[120px]">{userId}</span>
                 </div>
               </div>
+            </CardContent>
+          </Card>
+        </div>
+
+        {/* AI Coach */}
+        <div className="grid grid-cols-1 lg:grid-cols-12 gap-3 sm:gap-4 mb-5 sm:mb-6">
+          <Card className="card-hover border-border/50 bg-card/50 backdrop-blur-sm lg:col-span-12">
+            <CardHeader className="pb-3">
+              <div className="flex items-center justify-between gap-3 flex-wrap">
+                <CardTitle className="flex items-center gap-2 text-base font-heading">
+                  <Brain className="h-4 w-4 text-indigo-500" />
+                  AI Coach: Progress Insights
+                </CardTitle>
+
+                <div className="flex items-center gap-2">
+                  <Select
+                    value={String(rangeDays)}
+                    onValueChange={(value) => setRangeDays(Number(value) as 7 | 30 | 90)}
+                  >
+                    <SelectTrigger className="w-40 h-9 text-xs sm:text-sm border-border/50 bg-background/50 font-body">
+                      <SelectValue />
+                    </SelectTrigger>
+                    <SelectContent>
+                      <SelectItem value="7">Last 7 days</SelectItem>
+                      <SelectItem value="30">Last 30 days</SelectItem>
+                      <SelectItem value="90">Last 90 days</SelectItem>
+                    </SelectContent>
+                  </Select>
+
+                  <Button
+                    onClick={() => void analyzeProgress()}
+                    disabled={aiLoading}
+                    className="h-9 px-3 sm:px-4 font-body"
+                  >
+                    {aiLoading ? 'Analyzing...' : 'Analyze my progress'}
+                  </Button>
+                </div>
+              </div>
+            </CardHeader>
+
+            <CardContent>
+              {!aiResult ? (
+                <p className="text-sm font-body text-muted-foreground">
+                  Click <span className="font-medium">Analyze my progress</span> to get streak + efficiency + language coaching.
+                </p>
+              ) : !aiResult.enabled ? (
+                <p className="text-sm font-body text-muted-foreground">
+                  AI evaluation is currently turned off (internal toggle).
+                </p>
+              ) : aiResult.error ? (
+                <p className="text-sm font-body text-destructive">
+                  AI coaching failed: {aiResult.error}
+                </p>
+              ) : (
+                <div className="space-y-3">
+                  {typeof aiResult.progressScore === 'number' && (
+                    <div className="flex items-center gap-3 flex-wrap">
+                      <div className="text-sm font-body text-muted-foreground">Progress Score</div>
+                      <div className="text-xl font-heading text-foreground">{aiResult.progressScore}/100</div>
+                    </div>
+                  )}
+
+                  {aiResult.streakCoaching && (
+                    <div className="space-y-2">
+                      {aiResult.streakCoaching.correlationHighlights && aiResult.streakCoaching.correlationHighlights.length > 0 && (
+                        <div>
+                          <p className="text-sm font-body font-medium">What changed around streak drops</p>
+                          <div className="text-sm font-body text-muted-foreground space-y-1 mt-1">
+                            {aiResult.streakCoaching.correlationHighlights.map((t, i) => (
+                              <div key={i}>• {t}</div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+
+                      {aiResult.streakCoaching.habitFixes && aiResult.streakCoaching.habitFixes.length > 0 && (
+                        <div>
+                          <p className="text-sm font-body font-medium">Habit fixes</p>
+                          <div className="text-sm font-body text-muted-foreground space-y-1 mt-1">
+                            {aiResult.streakCoaching.habitFixes.map((t, i) => (
+                              <div key={i}>• {t}</div>
+                            ))}
+                          </div>
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {aiResult.efficiencyAnalysis && (
+                    <div className="space-y-2">
+                      <p className="text-sm font-body font-medium">Time efficiency</p>
+                      <div className="text-sm font-body text-muted-foreground">
+                        Trend: {aiResult.efficiencyAnalysis.trend || 'N/A'}
+                      </div>
+                      {aiResult.efficiencyAnalysis.targetedPractice && aiResult.efficiencyAnalysis.targetedPractice.length > 0 && (
+                        <div className="text-sm font-body text-muted-foreground space-y-1">
+                          {aiResult.efficiencyAnalysis.targetedPractice.map((t, i) => (
+                            <div key={i}>• {t}</div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {aiResult.languageStrategy && (
+                    <div className="space-y-2">
+                      <p className="text-sm font-body font-medium">Language strategy</p>
+                      {aiResult.languageStrategy.recommendedLanguageFocus && (
+                        <div className="text-sm font-body text-muted-foreground">
+                          Focus: {aiResult.languageStrategy.recommendedLanguageFocus}
+                        </div>
+                      )}
+                      {aiResult.languageStrategy.why && (
+                        <div className="text-sm font-body text-muted-foreground">{aiResult.languageStrategy.why}</div>
+                      )}
+                      {aiResult.languageStrategy.plan && aiResult.languageStrategy.plan.length > 0 && (
+                        <div className="text-sm font-body text-muted-foreground space-y-1">
+                          {aiResult.languageStrategy.plan.map((t, i) => (
+                            <div key={i}>• {t}</div>
+                          ))}
+                        </div>
+                      )}
+                    </div>
+                  )}
+
+                  {aiResult.nextActions && aiResult.nextActions.length === 3 && (
+                    <div className="space-y-2">
+                      <p className="text-sm font-body font-medium">Next 3 actions</p>
+                      <div className="text-sm font-body text-muted-foreground space-y-1">
+                        {aiResult.nextActions.map((t, i) => (
+                          <div key={i}>• {t}</div>
+                        ))}
+                      </div>
+                    </div>
+                  )}
+                </div>
+              )}
             </CardContent>
           </Card>
         </div>
