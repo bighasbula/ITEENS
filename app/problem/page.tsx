@@ -8,7 +8,7 @@ import { Separator } from '@/components/ui/separator';
 import CodeEditor from '@/components/CodeEditor';
 import Terminal from '@/components/Terminal';
 import ProblemDescription from '@/components/ProblemDescription';
-import { Judge0Service, SupportedLanguage } from '@/lib/judge0';
+import type { SupportedLanguage } from '@/lib/judge0';
 import { getProblemById } from '@/lib/problems';
 import { useRouter, useSearchParams } from 'next/navigation';
 import { useUser } from '@/lib/hooks/useUser';
@@ -69,12 +69,29 @@ function ProblemPageContent() {
     try {
       // Use the first test case for running
       const testCase = problem.testCases[0];
-      const result = await Judge0Service.executeCode(code, language, testCase.input);
-      
-      if (result.error) {
-        setOutput(`Error: ${result.error}\n`);
+      const response = await fetch('/api/judge0/execute', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          language,
+          stdin: testCase.input,
+        }),
+      });
+
+      const result = await response.json() as {
+        output?: string
+        error?: string | null
+        executionTime?: string
+        memory?: number
+      };
+
+      if (!response.ok || result.error) {
+        setOutput(`Error: ${result.error || 'Failed to execute code'}\n`);
       } else {
-        setOutput(`Input: ${testCase.input}\nOutput: ${result.output}\nExpected: ${testCase.expectedOutput}\nExecution time: ${result.executionTime}s\nMemory: ${result.memory}KB`);
+        setOutput(
+          `Input: ${testCase.input}\nOutput: ${result.output}\nExpected: ${testCase.expectedOutput}\nExecution time: ${result.executionTime}s\nMemory: ${result.memory}KB`,
+        );
       }
     } catch (error) {
       setOutput(`Execution failed: ${error instanceof Error ? error.message : 'Unknown error'}\n`);
@@ -93,11 +110,33 @@ function ProblemPageContent() {
     setOutput('Running all test cases...\n');
 
     try {
-      const testResults = await Judge0Service.testCode(
-        code, 
-        language, 
-        problem.testCases
-      );
+      const response = await fetch('/api/judge0/test', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          code,
+          language,
+          testCases: problem.testCases,
+        }),
+      });
+
+      const testResults = await response.json() as {
+        passed: number
+        total: number
+        results: Array<{
+          input: string
+          expectedOutput: string
+          actualOutput: string
+          passed: boolean
+          error?: string
+          executionTime?: string
+          memory?: number
+        }>
+      };
+
+      if (!response.ok) {
+        throw new Error('Failed to test code');
+      }
 
       let outputText = `Test Results:\n`;
       outputText += `Passed: ${testResults.passed}/${testResults.total}\n\n`;
