@@ -130,7 +130,7 @@ function SuccessPageContent() {
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 flex items-center justify-center">
         <div className="text-center">
           <div className="animate-spin rounded-full h-12 w-12 border-b-2 border-green-600 mx-auto mb-4"></div>
-          <p className="text-gray-600">Analyzing your solution...</p>
+          <p className="text-gray-700">Analyzing your solution...</p>
         </div>
       </div>
     );
@@ -160,7 +160,7 @@ function SuccessPageContent() {
             <CheckCircle className="h-8 w-8 sm:h-10 sm:w-10 text-green-600 mr-2 sm:mr-3" />
             <h1 className="text-2xl sm:text-3xl md:text-4xl font-heading text-gray-800">Congratulations!</h1>
           </div>
-          <p className="text-sm sm:text-base text-gray-600 font-body">
+          <p className="text-sm sm:text-base text-gray-700 font-body">
             You&apos;ve successfully solved &quot;{problem?.name || successData.problemId}&quot;
           </p>
         </div>
@@ -194,7 +194,7 @@ function SuccessPageContent() {
                 {successData.executionTime}s
               </p>
               <p className="text-xs sm:text-sm text-gray-500 mt-1 font-body">Execution time</p>
-              <p className="text-xs sm:text-sm text-gray-500 font-body">{successData.memory}KB memory</p>
+              <p className="text-xs sm:text-sm text-gray-700 font-body">{successData.memory}KB memory</p>
             </CardContent>
           </Card>
 
@@ -226,7 +226,7 @@ function SuccessPageContent() {
               </CardTitle>
             </CardHeader>
             <CardContent>
-              <p className="text-xs sm:text-sm text-gray-600 mb-3 font-body">{problem.description}</p>
+              <p className="text-xs sm:text-sm text-gray-700 mb-3 font-body">{problem.description}</p>
               <div className="flex flex-wrap gap-1.5">
                 {problem.tags.map((tag, index) => (
                   <Badge key={index} variant="outline" className="text-xs border-border/50 font-body">
@@ -280,11 +280,11 @@ function SuccessPageContent() {
           </CardHeader>
           <CardContent>
             {!ENABLE_AI_EVALUATION ? (
-              <p className="text-xs sm:text-sm text-gray-600 font-body">
+              <p className="text-xs sm:text-sm text-gray-700 font-body">
                 AI evaluation is currently turned off in internal code to avoid token usage.
               </p>
             ) : aiLoading ? (
-              <p className="text-xs sm:text-sm text-gray-600 font-body">Analyzing efficiency...</p>
+              <p className="text-xs sm:text-sm text-gray-700 font-body">Analyzing efficiency...</p>
             ) : aiResult?.error ? (
               <p className="text-xs sm:text-sm text-red-600 font-body">
                 AI evaluation failed: {aiResult.error}
@@ -331,7 +331,7 @@ function SuccessPageContent() {
                 )}
               </div>
             ) : (
-              <p className="text-xs sm:text-sm text-gray-600 font-body">
+              <p className="text-xs sm:text-sm text-gray-700 font-body">
                 AI evaluation is not available.
               </p>
             )}
