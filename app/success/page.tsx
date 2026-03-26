@@ -10,6 +10,7 @@ import { CheckCircle, Clock, Trophy, ArrowLeft, Copy } from 'lucide-react';
 import Link from 'next/link';
 import { getProblemById, getIdealSolution } from '@/lib/problems';
 import { SupportedLanguage } from '@/lib/judge0';
+import { ENABLE_AI_EVALUATION } from '@/lib/ai/aiToggle';
 
 interface SuccessData {
   problemId: string;
@@ -24,11 +25,24 @@ interface SuccessData {
   hintsUsed?: number;
 }
 
+interface AiEvaluationResponse {
+  enabled: boolean;
+  efficiencyScore?: number;
+  timeComplexity?: string;
+  spaceComplexity?: string;
+  keyIssues?: string[];
+  recommendation?: string;
+  improvedCode?: string;
+  error?: string;
+}
+
 function SuccessPageContent() {
   const searchParams = useSearchParams();
   const [successData, setSuccessData] = useState<SuccessData | null>(null);
   const [idealSolution, setIdealSolution] = useState<string>('');
   const [isLoading, setIsLoading] = useState(true);
+  const [aiLoading, setAiLoading] = useState(false);
+  const [aiResult, setAiResult] = useState<AiEvaluationResponse | null>(null);
 
   useEffect(() => {
     // Get data from URL params (in a real app, this would come from the database)
@@ -76,6 +90,40 @@ function SuccessPageContent() {
     navigator.clipboard.writeText(text);
     // You could add a toast notification here
   };
+
+  useEffect(() => {
+    if (!ENABLE_AI_EVALUATION) return;
+    if (!successData) return;
+    if (!successData.problemId || !successData.language || !successData.code) return;
+
+    const runEvaluation = async () => {
+      setAiLoading(true);
+      setAiResult(null);
+      try {
+        const res = await fetch('/api/ai/evaluate', {
+          method: 'POST',
+          headers: { 'Content-Type': 'application/json' },
+          body: JSON.stringify({
+            problemId: successData.problemId,
+            language: successData.language,
+            code: successData.code,
+          }),
+        });
+
+        const data = (await res.json()) as AiEvaluationResponse;
+        setAiResult(data);
+      } catch (e) {
+        setAiResult({
+          enabled: true,
+          error: e instanceof Error ? e.message : 'Unknown error',
+        });
+      } finally {
+        setAiLoading(false);
+      }
+    };
+
+    void runEvaluation();
+  }, [successData]);
 
   if (isLoading) {
     return (
@@ -222,6 +270,71 @@ function SuccessPageContent() {
             <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
               <pre className="text-xs sm:text-sm font-mono">{idealSolution}</pre>
             </div>
+          </CardContent>
+        </Card>
+
+        {/* AI Evaluation */}
+        <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
+          <CardHeader className="pb-3">
+            <CardTitle className="text-sm sm:text-base font-heading">AI Performance Analysis</CardTitle>
+          </CardHeader>
+          <CardContent>
+            {!ENABLE_AI_EVALUATION ? (
+              <p className="text-xs sm:text-sm text-gray-600 font-body">
+                AI evaluation is currently turned off in internal code to avoid token usage.
+              </p>
+            ) : aiLoading ? (
+              <p className="text-xs sm:text-sm text-gray-600 font-body">Analyzing efficiency...</p>
+            ) : aiResult?.error ? (
+              <p className="text-xs sm:text-sm text-red-600 font-body">
+                AI evaluation failed: {aiResult.error}
+              </p>
+            ) : aiResult && aiResult.enabled ? (
+              <div className="space-y-3">
+                <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
+                  <div className="text-sm sm:text-base font-heading">
+                    Efficiency Score:{' '}
+                    <span className="text-blue-600">
+                      {typeof aiResult.efficiencyScore === 'number' ? aiResult.efficiencyScore : 'N/A'}/100
+                    </span>
+                  </div>
+                  <div className="text-xs sm:text-sm text-gray-600 font-body">
+                    {aiResult.timeComplexity ? `Time: ${aiResult.timeComplexity}` : ''}{aiResult.spaceComplexity ? ` • Space: ${aiResult.spaceComplexity}` : ''}
+                  </div>
+                </div>
+
+                {aiResult.keyIssues && aiResult.keyIssues.length > 0 && (
+                  <div>
+                    <p className="text-xs sm:text-sm font-heading mb-1">Key Issues</p>
+                    <div className="text-xs sm:text-sm text-gray-700 space-y-1">
+                      {aiResult.keyIssues.map((k, i) => (
+                        <div key={i}>• {k}</div>
+                      ))}
+                    </div>
+                  </div>
+                )}
+
+                {aiResult.recommendation && (
+                  <div>
+                    <p className="text-xs sm:text-sm font-heading mb-1">Recommendation</p>
+                    <p className="text-xs sm:text-sm text-gray-700">{aiResult.recommendation}</p>
+                  </div>
+                )}
+
+                {aiResult.improvedCode && (
+                  <div>
+                    <p className="text-xs sm:text-sm font-heading mb-1">Better Way (Suggested Code)</p>
+                    <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
+                      <pre className="text-xs sm:text-sm font-mono">{aiResult.improvedCode}</pre>
+                    </div>
+                  </div>
+                )}
+              </div>
+            ) : (
+              <p className="text-xs sm:text-sm text-gray-600 font-body">
+                AI evaluation is not available.
+              </p>
+            )}
           </CardContent>
         </Card>
 
