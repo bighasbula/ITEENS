@@ -242,7 +242,7 @@ function SuccessPageContent() {
         <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
           <CardHeader className="pb-3">
             <CardTitle className="flex items-center justify-between text-sm sm:text-base font-heading">
-              Your Solution
+              <div className="text-gray-700">Your Solution</div>
               <Button
                 variant="outline"
                 size="sm"
