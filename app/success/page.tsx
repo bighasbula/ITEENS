@@ -171,7 +171,7 @@ function SuccessPageContent() {
             <CardHeader className="text-center pb-3">
               <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
                 <Clock className="h-4 w-4 mr-1.5 text-blue-600" />
-                Time Taken
+                <div className="text-gray-700">Time Taken</div>
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -186,7 +186,7 @@ function SuccessPageContent() {
             <CardHeader className="text-center pb-3">
               <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
                 <Trophy className="h-4 w-4 mr-1.5 text-yellow-600" />
-                Performance
+                <div className="text-gray-700">Performance</div>
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -202,7 +202,7 @@ function SuccessPageContent() {
             <CardHeader className="text-center pb-3">
               <CardTitle className="flex items-center justify-center text-sm sm:text-base font-heading">
                 <CheckCircle className="h-4 w-4 mr-1.5 text-green-600" />
-                Test Cases
+                <div className="text-gray-700">Test Cases</div>
               </CardTitle>
             </CardHeader>
             <CardContent className="text-center">
@@ -219,7 +219,7 @@ function SuccessPageContent() {
           <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
             <CardHeader className="pb-3">
               <CardTitle className="flex items-center gap-2 text-sm sm:text-base font-heading">
-                {problem.name}
+                <div className="text-gray-700">{problem.name}</div>
                 <Badge className={`text-xs ${getDifficultyColor(problem.difficulty)} font-body`}>
                   {problem.difficulty}
                 </Badge>
@@ -264,7 +264,7 @@ function SuccessPageContent() {
         {/* Ideal Solution */}
         <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm sm:text-base font-heading">Ideal Solution</CardTitle>
+            <CardTitle className="text-sm sm:text-base font-heading"><div className="text-gray-700">Ideal Solution</div></CardTitle>
           </CardHeader>
           <CardContent>
             <div className="bg-gray-900 text-green-400 p-3 sm:p-4 rounded-md overflow-x-auto">
@@ -276,7 +276,7 @@ function SuccessPageContent() {
         {/* AI Evaluation */}
         <Card className="bg-white shadow-sm border-border/50 mb-5 sm:mb-6 card-hover">
           <CardHeader className="pb-3">
-            <CardTitle className="text-sm sm:text-base font-heading">AI Performance Analysis</CardTitle>
+            <CardTitle className="text-sm sm:text-base font-heading"><div className="text-gray-700">AI Performance Analysis</div></CardTitle>
           </CardHeader>
           <CardContent>
             {!ENABLE_AI_EVALUATION ? (
@@ -293,7 +293,7 @@ function SuccessPageContent() {
               <div className="space-y-3">
                 <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-2">
                   <div className="text-sm sm:text-base font-heading">
-                    Efficiency Score:{' '}
+                    <div className="text-gray-700">Efficiency Score:</div>{' '}
                     <span className="text-blue-600">
                       {typeof aiResult.efficiencyScore === 'number' ? aiResult.efficiencyScore : 'N/A'}/100
                     </span>
