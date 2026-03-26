@@ -104,13 +104,32 @@ export default function MatchPage() {
 
   // Timer effect
   useEffect(() => {
-    if (match?.status === 'in-progress' && match.startedAt) {
+    const computeElapsedSeconds = (startAt?: number, endAt?: number) => {
+      if (!startAt || !endAt) return 0
+      const elapsedMs = endAt - startAt
+      // Prevent negative timer values caused by client/server clock skew.
+      return Math.max(0, Math.floor(elapsedMs / 1000))
+    }
+
+    // While the match is running, tick using current time.
+    if (match && match.status === 'in-progress' && match.startedAt) {
       const interval = setInterval(() => {
-        setTimeElapsed(Math.floor((Date.now() - match.startedAt!) / 1000))
+        setTimeElapsed(computeElapsedSeconds(match.startedAt!, Date.now()))
       }, 1000)
       return () => clearInterval(interval)
     }
-  }, [match?.status, match?.startedAt])
+
+    // After the match ends, lock the timer to completedAt (if available).
+    if (
+      match &&
+      match.status !== 'waiting' &&
+      match.status !== 'in-progress' &&
+      match.startedAt &&
+      match.completedAt
+    ) {
+      setTimeElapsed(computeElapsedSeconds(match.startedAt, match.completedAt))
+    }
+  }, [match?.status, match?.startedAt, match?.completedAt])
 
   // Initialize code when problem loads or language changes
   useEffect(() => {
