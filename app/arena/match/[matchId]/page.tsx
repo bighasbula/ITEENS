@@ -112,17 +112,18 @@ export default function MatchPage() {
     }
 
     // While the match is running, tick using current time.
-    if (match?.status === 'in-progress' && match.startedAt) {
+    if (match && match.status === 'in-progress' && match.startedAt) {
       const interval = setInterval(() => {
-        setTimeElapsed(computeElapsedSeconds(match.startedAt, Date.now()))
+        setTimeElapsed(computeElapsedSeconds(match.startedAt!, Date.now()))
       }, 1000)
       return () => clearInterval(interval)
     }
 
     // After the match ends, lock the timer to completedAt (if available).
     if (
-      match?.status !== 'waiting' &&
-      match?.status !== 'in-progress' &&
+      match &&
+      match.status !== 'waiting' &&
+      match.status !== 'in-progress' &&
       match.startedAt &&
       match.completedAt
     ) {
