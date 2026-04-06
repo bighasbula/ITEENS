@@ -144,7 +144,14 @@ export class Judge0Service {
       try {
         const result = await this.executeCode(code, language, testCase.input);
         
-        const isPassed = result.output.trim() === testCase.expectedOutput.trim();
+        // Judge0 stdout/casing can differ across languages (e.g. Python `True` vs Java `true`).
+        // First try exact match (preserves case-sensitive problems), then fall back to case-insensitive.
+        const normalize = (value: string) =>
+          value.trim().replace(/\r\n/g, '\n');
+        const actual = normalize(result.output);
+        const expected = normalize(testCase.expectedOutput);
+        const isPassed =
+          actual === expected || actual.toLowerCase() === expected.toLowerCase();
         if (isPassed) passed++;
 
         results.push({
